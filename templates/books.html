@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Books</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    <ul>
+        {% for book in book_list %}
+     
+        <li>
+            {{ book.title }}
+        </li>
+        <ul>
+            <li>{{ book.author }}</li>
+            <li>{{ book.category }}</li>
+        </ul>
+        <br>
+        {% endfor %}
+    </ul>
+</body>
+</html>

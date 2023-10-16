@@ -1,21 +1,34 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Books</title>
-    <!-- <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet"> -->
+    <title>Index</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <meta charset="utf-8"/>
+
 </head>
 <body>
-    <ul>
-        {% for book in book_category %}
-     
-        <li>
-            {{ book.title }}
-        </li>
-        <ul>
-            <li>{{ book.author }}</li>
-            <li>{{ book.category }}</li>
-        </ul>
+
+    <form action="books" method="post">
+        <fieldset>
+            <legend><b>Форма ввода</b></legend>
+
+        <label for="name">Enter prompt</label>
         <br>
-        {% endfor %}
-    </ul>
+        <input type="text" id="prompt" name="prompt"/>
+        <input type="submit" value="Send" />
+
+       </fieldset>
+    </form>
+
+    <br>
+    <p>Examples to use:</p>
+    <p>BOOKS = [ </p>
+	<p>{'title': 'Jane Eyre', 'author': 'Jane Austen', 'category': 'period drama'},</p>
+	<p>{'title': 'Great Expectations', 'author': 'Charles Dickens', 'category': 'period drama'},</p>
+	<p>{'title': 'Bourne Idemtity', 'author': 'Robert Ludlum', 'category': 'mystery/thriller'},</p>
+	<p>{'title': 'DaVinci Code', 'author': 'Dan Brown', 'category': 'mystery/thriller'},</p>
+	<p>{'title': 'The Match Girl', 'author': 'Charles Dickens', 'category': 'tragedy'}</p>
+    <p>]</p>
+
 </body>
 </html>
