@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,400;0,700;1,400;1,700&family=Magra:wght@700&family=Montserrat:wght@300;500;700&family=Red+Hat+Text:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
+    <script src="https://kit.fontawesome.com/c6a6357097.js" crossorigin="anonymous"></script> 
+    
+
+    <link rel="stylesheet" href="frontend/css/style.css">
+    <title>LIBCOR</title>
+</head>
+<body>
+    <!-- Проверка использования oninput -->
+    <!-- <label>Введите текст:
+        <input type="text" id="textField">
+    </label>
+    
+    <label>При каждом изменении возникает событие <code>input</code>:
+        <textarea disabled id="textResult"></textarea>
+    </label> -->
+
+    <section class="search">
+        <div class="container">
+            <div class="search__wrap">
+                <h2>Расширенный поиск</h2>
+                <div class="search__block">
+                    <div class="search__items">
+                        <div class="main__select main__select_mg0">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <!-- Не получается реализовать -->
+                            <!-- <div class="main__clear"><i class="fa-solid fa-xmark"></i></div> --> 
+                            <a class="main__arrow" href="#"><i class="fa-solid fa-arrow-right"></i></a>
+                            <select class="js-choice" id="choiced" name="Select" multiple>
+                                <option value="">Поиск книг по названию, автору и т.д.</option>
+                                <option>Электроник</option>
+                                <option>Сыроежкин</option>
+                                <option>Чижиков</option>
+                                <option>Кукушкина</option>
+                            </select>
+                        </div>
+                        <!-- Первое -->
+                        <div class="search__panel">
+                            <div class="search__panel__btn search__panel__btn_active">
+                                <div class="search__panel__title">Найдено в названии книг<i class="fa-solid fa-chevron-down"></i></div>
+                            </div>
+                            <div class="search__panel__list search__panel_title search__panel__list_active">
+                                {% for book in book_list %}
+                                <div class="search__panel__item">
+                                    <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
+                                    <div class="author">
+                                        <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">{{ book.title }}</div><div class="author_book">"{{ book.author }}"</div></div>
+                                    </div>
+                                    <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1234</div></div></div>
+                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">{{ book.category }}</div></div></div>
+                                </div>
+
+                                {% endfor %}
+
+                                
+                            </div>
+                        </div>
+                        <!-- Новое
+                        <div class="search__panel">
+                            <div class="search__panel__btn search__panel__btn_active">
+                                <div class="search__panel__title">Найдено в оглавлении книг<i class="fa-solid fa-chevron-down"></i></div>
+                            </div>
+                            <div class="search__panel__list search__panel_heading search__panel__list_active">
+                                <div class="search__panel__item">
+                                    <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
+                                    <div class="author">
+                                        <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
+                                    </div>
+                                    <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
+                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
+                                </div>
+
+                                <div class="search__panel__item">
+                                    <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
+                                    <div class="author">
+                                        <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
+                                    </div>
+                                    <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
+                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                         -->
+                    </div>
+                    <div class="search__filter">
+                        <div class="search__filter__title">Параметры поиска</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
+    <script src="frontend/js/script.js"></script>
+    <script src="frontend/js/change.js"></script>
+</body>
+</html>

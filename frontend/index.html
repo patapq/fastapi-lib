@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIBCOR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,400;0,700;1,400;1,700&family=Magra:wght@700&family=Montserrat:wght@300;500;700&family=Red+Hat+Text:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <!-- Include Choices CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
+    <script src="https://kit.fontawesome.com/c6a6357097.js" crossorigin="anonymous"></script>
+    
+    
+    
+    <link rel="stylesheet" href="frontend/css/style.css">
+</head>
+<body>
+    <section class="main">
+        <div class="container">
+            <div class="main__logo">
+                <img src="frontend/icons/book.svg" alt="logo" class="main__logoimg">
+                <h1 class="main__title">LIBCOR</h1>
+            </div>
+
+            <div class="main__select">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <!-- Не получается реализовать -->
+                <!-- <div class="main__clear"><i class="fa-solid fa-xmark"></i></div> --> 
+                <form action="books" method="post">
+
+                <a class="main__arrow"><i class="fa-solid fa-arrow-right" type="submit"></i></a>
+                
+                <input type="submit" />
+
+                <select class="js-choice" id="choiced" name="Select" multiple>
+                    <option value="">Поиск книг по названию, автору и т.д.</option>
+                    <option>Электроник</option>
+                    <option>Сыроежкин</option>
+                    <option>Чижиков</option>
+                    <option>Кукушкина</option>
+                </form>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
+    <script src="frontend/js/script.js"></script>
+</body>
+</html>
