@@ -1,8 +1,7 @@
 # fastapi-lib
 
 ```
-pip install fastapi
-pip install uvicorn[standard]
+pip install -r requirements.txt
 ```
 
 ```
