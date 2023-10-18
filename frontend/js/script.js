@@ -16,7 +16,7 @@ for (let index = 0; index < array.length; index++) {
 let element = document.querySelector('.js-choice');
 
 const choices = new Choices(element,{
-    searchEnabled: false
+    searchEnabled: true
 });
 
 $('input').attr('name', 'prompt');
@@ -42,3 +42,32 @@ $('.choices__input--cloned').blur(function(){
     document.querySelector(".choices__input--cloned").style = "min-width: 1ch; width: 30ch;"; 
 });
 
+
+// const el = document.querySelector('button');
+// console.log(el);
+// console.log('HI!')
+
+// el.addEventListener('click', async function(){
+ 
+//     // const prompt = document.getElementById("prompt").value;
+//     const info = document.getElementById("infodiv").innerHTML;
+
+    
+//     // console.log(prompt);
+//     console.log(info);
+
+//     const response = await fetch("/books", {
+//             method: "POST",
+//             // redirect: "follow",
+//             headers: { "Accept": "application/json", "Content-Type": "multipart/form-data" },
+//             body: info
+            
+//         }).then(res => res.json());
+//         // if (response.ok) {
+//         //     const data = await response.json();
+//         //     // document.getElementById("bebra").textContent = data.message;
+//         //     // return data;
+//         // }
+//         // else
+//         //     console.log(response);
+// });

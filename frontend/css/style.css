@@ -75,10 +75,18 @@
 }
 
 .main__arrow i {
-    position: block;
+    position: absolute;
     margin: 9px;
     font-size: 23px;
     color: #000
+}
+
+.main__arrow_btn {
+    border: 1px solid #6a673c
+}
+
+.main__arrow_btn i {
+    position: relative
 }
 
 .main__clear {

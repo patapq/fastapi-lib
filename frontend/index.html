@@ -22,32 +22,35 @@
                 <img src="frontend/icons/book.svg" alt="logo" class="main__logoimg">
                 <h1 class="main__title">LIBCOR</h1>
             </div>
-
+            
             <div class="main__select">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <!-- Не получается реализовать -->
                 <!-- <div class="main__clear"><i class="fa-solid fa-xmark"></i></div> --> 
                 <form action="books" method="post">
+                    
+                    <button id="btn" name="btn" class="main__arrow main__arrow_btn"><i class="fa-solid fa-arrow-right"></i></button>
+                    
+                    <!-- <div class="infodiv" id="infodiv" name="infodiv" data-value="bebik">someinfo</div> -->
 
-                <div class="main__arrow"><button id="btn" type="submit" class="fa-solid fa-arrow-right"></button></div>
-                
-                <!-- <input type="submit" value="Input" /> -->
-                <!-- <button>Button</button> -->
 
-                <select class="js-choice" id="choiced" name="Select" multiple>
-                    <option value="">Поиск книг по названию, автору и т.д.</option>
-                    <option>Электроник</option>
-                    <option>Сыроежкин</option>
-                    <option>Чижиков</option>
-                    <option>Кукушкина</option>
-                </form>
+                    <select class="js-choice" id="choiced" name="Select" multiple>
+                        <option value="">Поиск книг по названию, автору и т.д.</option>
+                        <!-- <div class="choices__item choices__item--selectable" data-item data-id="1" data-value="Кукушкина" data-custom-properies="null">Кукушкина</div> -->
+                        <!-- <input id="asd" name="asd" type="text" value="Hey"> -->
+                        <option>Электроник</option>
+                        <option>Сыроежкин</option>
+                        <option>Чижиков</option>
+                        <option>Кукушкина</option>
+                    </form>
                 </select>
             </div>
         </div>
     </section>
-
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
     <script src="frontend/js/script.js"></script>
+    
 </body>
 </html>

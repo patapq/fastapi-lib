@@ -1,7 +1,10 @@
 from fastapi import Body, FastAPI, Request, Form
-from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+
+from pydantic import BaseModel
+from typing import Annotated
 
 
 app = FastAPI() #allows us to use the dependencies that came with FastAPI
@@ -22,22 +25,27 @@ BOOKS = [
 ]
 
 
-#############################################################
+# class Item(BaseModel):
+# 	prompt: str
+# 	info: str
+	
+
+
 @app.get('/')
 def root():
 	return FileResponse('frontend/index.html')
 
 
-
 @app.post('/books', response_class=HTMLResponse)
-async def read_all_books_query(request: Request, prompt: str = Form()):
+async def read_all_books_query(request: Request, prompt: Annotated[str, Form()]):
+
 	book_list = []
 	for book in BOOKS:
 		if book.get('title').casefold() == prompt.casefold() or book.get('author').casefold() == prompt.casefold() or book.get('category').casefold() == prompt.casefold():
 			book_list.append(book)
 
 	return templates.TemplateResponse("books.html", {"request": request, 'book_list': book_list})
-#############################################################
+
 
 
 

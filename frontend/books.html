@@ -33,8 +33,10 @@
                             <i class="fa-solid fa-magnifying-glass"></i>
                             <!-- Не получается реализовать -->
                             <!-- <div class="main__clear"><i class="fa-solid fa-xmark"></i></div> --> 
-                            <a class="main__arrow" href="#"><i class="fa-solid fa-arrow-right"></i></a>
-                            <select class="js-choice" id="choiced" name="Select" multiple>
+                            <form action="books" method="post">
+                    
+                                <!-- <button>Button</button> -->
+                                <button class="main__arrow main__arrow_btn"><i class="fa-solid fa-arrow-right"></i></button>                            <select class="js-choice" id="choiced" name="Select" multiple>
                                 <option value="">Поиск книг по названию, автору и т.д.</option>
                                 <option>Электроник</option>
                                 <option>Сыроежкин</option>
@@ -42,6 +44,7 @@
                                 <option>Кукушкина</option>
                             </select>
                         </div>
+                    </form>
                         <!-- Первое -->
                         <div class="search__panel">
                             <div class="search__panel__btn search__panel__btn_active">
