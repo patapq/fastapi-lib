@@ -7,21 +7,20 @@ from pydantic import BaseModel
 from typing import Annotated
 
 
-app = FastAPI() #allows us to use the dependencies that came with FastAPI
+app = FastAPI()
 
-app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
+app.mount("/frontend/", StaticFiles(directory="frontend"), name="frontend")
 
-templates = Jinja2Templates(directory="frontend")
+templates = Jinja2Templates(directory="frontend/")
 
 
 
-#for the purpose of this illustration, a list instead of a model will be used
 BOOKS = [ 
-	{'title': 'Jane Eyre', 'author': 'Jane Austen', 'category': 'period drama'},
-	{'title': 'Great Expectations', 'author': 'Charles Dickens', 'category': 'period drama'},
-	{'title': 'Bourne Idemtity', 'author': 'Robert Ludlum', 'category': 'mystery/thriller'},
-	{'title': 'DaVinci Code', 'author': 'Dan Brown', 'category': 'mystery/thriller'},
-	{'title': 'The Match Girl', 'author': 'Charles Dickens', 'category': 'tragedy'}
+	{'id': 1, 'title': 'Jane Eyre', 'author': 'Jane Austen', 'category': 'period drama'},
+	{'id': 2, 'title': 'Great Expectations', 'author': 'Charles Dickens', 'category': 'period drama'},
+	{'id': 3, 'title': 'Bourne Idemtity', 'author': 'Robert Ludlum', 'category': 'mystery/thriller'},
+	{'id': 4, 'title': 'DaVinci Code', 'author': 'Dan Brown', 'category': 'mystery/thriller'},
+	{'id': 5, 'title': 'The Match Girl', 'author': 'Charles Dickens', 'category': 'tragedy'}
 ]
 
 
@@ -32,12 +31,12 @@ BOOKS = [
 
 
 @app.get('/')
-def root():
-	return FileResponse('frontend/index.html')
+def root(request: Request):
+	return templates.TemplateResponse('index.html', {'request': request})
 
 
 @app.post('/books', response_class=HTMLResponse)
-async def read_all_books_query(request: Request, prompt: Annotated[str, Form()]):
+async def books(request: Request, prompt: Annotated[str, Form(...)]):
 
 	book_list = []
 	for book in BOOKS:
@@ -46,6 +45,11 @@ async def read_all_books_query(request: Request, prompt: Annotated[str, Form()])
 
 	return templates.TemplateResponse("books.html", {"request": request, 'book_list': book_list})
 
+
+@app.get("/books/{book_id}", response_class=HTMLResponse)
+async def show_book(request: Request, book_id: int):
+	book = BOOKS[book_id - 1]
+	return templates.TemplateResponse("book.html", {"request": request, "book": book})
 
 
 

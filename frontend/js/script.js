@@ -43,15 +43,16 @@ $('.choices__input--cloned').blur(function(){
 });
 
 
-// const el = document.querySelector('button');
+
+// const el = document.getElementById('btn');
 // console.log(el);
 // console.log('HI!')
 
 // el.addEventListener('click', async function(){
  
 //     // const prompt = document.getElementById("prompt").value;
-//     const info = document.getElementById("infodiv").innerHTML;
-
+//     const info = document.getElementById("prompt").value;
+    
     
 //     // console.log(prompt);
 //     console.log(info);

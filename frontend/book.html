@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,400;0,700;1,400;1,700&family=Magra:wght@700&family=Montserrat:wght@300;500;700&family=Red+Hat+Text:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
+    <script src="https://kit.fontawesome.com/c6a6357097.js" crossorigin="anonymous"></script> 
+
+    <link rel="stylesheet" href="../frontend/css/style.css">
+
+    <title>Document</title>
+</head>
+<body>
+
+    <section class="search">
+        <div class="container">
+            <div class="search__wrap">
+                <h2>Расширенный поиск</h2>
+                <div class="main__select main__select_mg0 main__select_mt10">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <!-- Не получается реализовать -->
+                    <!-- <div class="main__clear"><i class="fa-solid fa-xmark"></i></div> --> 
+                    <!-- <a class="main__arrow" href="#"><i class="fa-solid fa-arrow-right"></i></a> -->
+                    
+                    <a href="/books"><button class="main__arrow main__arrow_btn"><i class="fa-solid fa-arrow-right"></i></button></a>
+                    <select class="js-choice" id="choiced" name="Select" multiple>
+                        <option value="">Поиск книг по названию, автору и т.д.</option>
+                    </select>
+                </div>
+                <div class="search__block">
+                    <div class="search__items">
+                        <div class="search__result">
+                            <h2>Результат поиска</h2>
+                            <div class="search__book__author">{{ book.title }}. {{ book.author }}</div>
+                            <div class="search__book">
+                                <div class="search__book__img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="book"></div>
+                                <div class="search__book__characteristics">
+                                    <div class="search__book__descr">Характеристики</div>
+                                    <div class="search__book__descr__wrapper">
+                                        <div class="search__book__descr__wrap">
+                                            <div class="search__book__descr__wrap_title">Автор</div>
+                                            <div class="search__book__descr__wrap_title-value">{{ book.author }}</div>
+                                        </div>
+                                        <div class="search__book__descr__wrap">
+                                            <div class="search__book__descr__wrap_title">Название</div>
+                                            <div class="search__book__descr__wrap_title-value">{{ book.title }}</div>
+                                        </div>
+                                        <div class="search__book__descr__wrap">
+                                            <div class="search__book__descr__wrap_title">Издательство</div>
+                                            <div class="search__book__descr__wrap_title-value">Эксмо</div>
+                                        </div>
+                                        <div class="search__book__descr__wrap">
+                                            <div class="search__book__descr__wrap_title">Год издательства</div>
+                                            <div class="search__book__descr__wrap_title-value">1831</div>
+                                        </div>
+                                        <div class="search__book__descr__wrap">
+                                            <div class="search__book__descr__wrap_title">Страниц</div>
+                                            <div class="search__book__descr__wrap_title-value">224 стр.</div>
+                                        </div>
+                                        <div class="search__book__descr__wrap">
+                                            <div class="search__book__descr__wrap_title">Категория</div>
+                                            <div class="search__book__descr__wrap_title-value">{{ book.category }}</div>
+                                        </div>
+                                        <div class="search__book__descr__wrap">
+                                            <div class="search__book__descr__wrap_title">Тип</div>
+                                            <div class="search__book__descr__wrap_title-value">Книга</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search__filter">
+                        <div class="search__filter__title">Параметры поиска</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
+    <script src="../frontend/js/script.js"></script>
+    <script src="../frontend/js/change.js"></script>
+</body>
+</html>
