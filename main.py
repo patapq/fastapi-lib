@@ -24,11 +24,6 @@ BOOKS = [
 ]
 
 
-# class Item(BaseModel):
-# 	prompt: str
-# 	info: str
-	
-
 
 @app.get('/')
 def root(request: Request):
@@ -37,7 +32,7 @@ def root(request: Request):
 
 @app.post('/books', response_class=HTMLResponse)
 async def books(request: Request, prompt: Annotated[str, Form(...)]):
-
+	
 	book_list = []
 	for book in BOOKS:
 		if book.get('title').casefold() == prompt.casefold() or book.get('author').casefold() == prompt.casefold() or book.get('category').casefold() == prompt.casefold():
@@ -46,10 +41,18 @@ async def books(request: Request, prompt: Annotated[str, Form(...)]):
 	return templates.TemplateResponse("books.html", {"request": request, 'book_list': book_list})
 
 
+
 @app.get("/books/{book_id}", response_class=HTMLResponse)
 async def show_book(request: Request, book_id: int):
 	book = BOOKS[book_id - 1]
 	return templates.TemplateResponse("book.html", {"request": request, "book": book})
+
+
+
+# @app.post("/books/{book_id}", response_class=HTMLResponse)
+# async def show_book(request: Request, book_id: int, prompt = Form(...)):
+# 	book = BOOKS[book_id - 1]
+# 	return templates.TemplateResponse("book.html", {"request": request, "book": book})
 
 
 
