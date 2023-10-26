@@ -13,7 +13,7 @@
     
     
     
-    <link rel="stylesheet" href="frontend/css/style.css">
+    <link rel="stylesheet" type="text/css" href="frontend/css/style.css">
 </head>
 <body>
     <section class="main">
@@ -22,35 +22,29 @@
                 <img src="frontend/icons/book.svg" alt="logo" class="main__logoimg">
                 <h1 class="main__title">LIBCOR</h1>
             </div>
-            
+
             <div class="main__select">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <!-- Не получается реализовать -->
-                <!-- <div class="main__clear"><i class="fa-solid fa-xmark"></i></div> --> 
-                <form action="books" method="post">
-                    
-                    <button id="btn" name="btn" class="main__arrow main__arrow_btn"><i class="fa-solid fa-arrow-right"></i></button>
-                    <!-- <a id="btn" class="main__arrow" href="/books"><i class="fa-solid fa-arrow-right"></i></a> -->
-                    <!-- <div class="infodiv" id="infodiv" name="infodiv" data-value="bebik">someinfo</div> -->
-
-
-                    <select class="js-choice" id="choiced" name="Select" multiple>
-                        <option value="">Поиск книг по названию, автору и т.д.</option>
-                        <!-- <div class="choices__item choices__item--selectable" data-item data-id="1" data-value="Кукушкина" data-custom-properies="null">Кукушкина</div> -->
-                        <!-- <input id="asd" name="asd" type="text" value="Hey"> -->
-                        <option>Электроник</option>
-                        <option>Сыроежкин</option>
-                        <option>Чижиков</option>
-                        <option>Кукушкина</option>
-                    </form>
-                </select>
-            </div>
+                
+                <a id="btn" class="main__arrow main__arrow_btn" href="javascript:void(0)"><i class="fa-solid fa-arrow-right"></i></a>
+                <!-- <a href="books.html"><button class="main__arrow main__arrow_btn"><i class="fa-solid fa-arrow-right"></i></button></a> -->
+                <input type="text" class="main__input" id="prompt" placeholder="Поиск по системе">
+                <div class="select" id="list">
+                    <div class="option">Толстой</div>
+                    <div class="option">Достоевский</div>
+                    <div class="option">Тургенев</div>
+                    <div class="option">Пушкин</div>
+                    <div class="option">Гончаров</div>
+                </div>
+            </div>    
+            
         </div>
     </section>
+
+
     
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
     <script src="frontend/js/script.js"></script>
-    
 </body>
 </html>

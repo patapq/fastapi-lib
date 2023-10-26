@@ -13,8 +13,22 @@
 
 .main {
     min-height: 100vh;
-    background-color: #bdb76b;
+    background-color: #c5bf69;
     padding-top: 100px
+}
+
+.main__input {
+    width: 100%;
+    height: 50px;
+    padding: 0 0 0 50px;
+    border: 1px solid #6a673c;
+    border-radius: 20px;
+    box-shadow: 0 0 5px #6a673c;
+    font-size: 18px
+}
+
+.main__input:focus {
+    outline: 0
 }
 
 .main__logo img {
@@ -41,14 +55,48 @@
     transition: .5s all
 }
 
-.main__select select {
-    width: 560px
+.main__select .select {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    min-height: 40px;
+    max-height: 300px;
+    overflow: auto;
+    margin-top: 10px;
+    border: 1px solid gray;
+    box-shadow: 0 0 5px #6a673c;
+    border-radius: 5px;
+    z-index: 4
+}
+
+.main__select .select_top62 {
+    margin-top: 0;
+    top: 62px
+}
+
+.main__select .select_active {
+    display: block
+}
+
+.main__select .select .option {
+    transition: .2s all;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5px 0 15px
+}
+
+.main__select .select .option:hover {
+    background-color: #c5bf69
 }
 
 .main__select i {
     position: absolute;
     z-index: 3;
-    margin: 19px 0 0 17px;
+    margin: 16px 0 0 17px;
     font-size: 20px
 }
 
@@ -66,10 +114,10 @@
     top: 0;
     width: 40px;
     height: 40px;
-    background-color: #bdb76b;
+    background-color: #c5bf69;
     z-index: 2;
     border-radius: 100%;
-    margin: 9px 10px 0 0;
+    margin: 5px 10px 0 0;
     cursor: pointer;
     transition: .5s all
 }
@@ -97,7 +145,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    color: #bdb76b;
+    color: #c5bf69;
     z-index: 4;
     margin: 16px 80px 0 0;
     cursor: pointer
@@ -121,7 +169,7 @@ h2 {
 
 .search {
     min-height: 100vh;
-    background-color: #bdb76b;
+    background-color: #c5bf69;
     padding-top: 60px;
     padding-bottom: 60px
 }
@@ -131,10 +179,14 @@ h2 {
     padding-right: 20px
 }
 
+.search__items_w100 {
+    width: 100%
+}
+
 .search__filter {
     width: 25%;
     padding-left: 20px;
-    border-left: 1px solid #bdb76b
+    border-left: 1px solid #c5bf69
 }
 
 .search__wrap {
@@ -173,11 +225,11 @@ h2 {
     border-radius: 10px;
     transition: .5s all;
     cursor: pointer;
-    border: 1px solid #bdb76b
+    border: 1px solid #c5bf69
 }
 
 .search__panel__btn:hover {
-    background-color: #bdb76b
+    background-color: #c5bf69
 }
 
 .search__panel__btn i {
@@ -192,8 +244,6 @@ h2 {
     display: none;
     width: 100%;
     min-height: 50px;
-    padding: 10px;
-    border: 1px solid #bdb76b;
     margin-top: 10px
 }
 
@@ -204,10 +254,12 @@ h2 {
 .search__panel__item {
     width: 100%;
     min-height: 50px;
-    border: 1px solid #bdb76b;
+    border: 1px solid #c5bf69;
+    border-radius: 10px;
     display: flex;
     padding: 15px;
-    margin-top: 10px
+    margin-top: 10px;
+    box-shadow: 0 1px 5px #c5bf69
 }
 
 .search__panel__item:nth-child(1) {
@@ -227,18 +279,18 @@ h2 {
 .search__panel__item .author {
     width: 30%;
     padding: 0 15px 0 15px;
-    border-left: 1px solid #bdb76b
+    border-left: 1px solid #c5bf69
 }
 
 .search__panel__item .years {
     width: 20%;
     padding: 0 15px 0 15px;
-    border-left: 1px solid #bdb76b
+    border-left: 1px solid #c5bf69
 }
 
 .search__panel__item .pages {
     padding-left: 15px;
-    border-left: 1px solid #bdb76b
+    border-left: 1px solid #c5bf69
 }
 
 .search__panel__item .heading {
@@ -258,14 +310,20 @@ h2 {
 
 .search__book {
     margin-top: 20px;
-    padding: 10px;
+    padding: 20px;
     border: 1px solid #6a673c;
     border-radius: 10px;
-    display: flex
+    display: block;
+    width: 100%
 }
 
 .search__book__author {
     margin-top: 10px
+}
+
+.search__book__block {
+    display: flex;
+    width: 100%
 }
 
 .search__book__img {
@@ -288,7 +346,7 @@ h2 {
 
 .search__book__descr__wrapper {
     width: 100%;
-    margin-top: 10px
+    margin-top: 30px
 }
 
 .search__book__descr__wrap {
@@ -296,7 +354,7 @@ h2 {
     width: 100%;
     margin-top: 10px;
     padding-bottom: 2px;
-    border-bottom: 1px solid #bdb76b
+    border-bottom: 1px solid #c5bf69
 }
 
 .search__book__descr__wrap_title {
@@ -310,50 +368,91 @@ h2 {
     width: 50%
 }
 
-.choices {
-    padding: 5px
+.search__book__descryption {
+    margin-top: 15px
 }
 
-.choices__input {
-    font-size: 18px;
+.search__book__descryption_title {
+    font-size: 20px;
     font-weight: 500
 }
 
-.choices__inner {
-    padding-left: 40px;
-    padding-right: 78px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-    border: 1px solid #bdb76b;
-    box-shadow: 0 0 5px #6a673c
+.search__book__descryption_text {
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 400
 }
 
-.choices .is-open {
-    border-radius: 20px
+ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none
 }
 
-.choices__list--dropdown .choices__item--selectable.is-highlighted,
-.choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
-    background-color: #bdb76b
+ul.breadcrumb li {
+    display: inline;
+    font-size: 18px
 }
 
-.choices__list--multiple .choices__item {
-    background-color: #bdb76b;
+ul.breadcrumb li a {
+    color: #c5bf69;
+    text-decoration: none;
+    transition: .2s all
+}
+
+ul.breadcrumb li a:hover {
+    color: #6a673c;
+    text-decoration: underline
+}
+
+ul.breadcrumb li+li:before {
+    padding: 8px;
     color: #000;
+    content: "/ "
+}
+
+.search__filter__title {
+    font-size: 18px;
+    font-weight: 700
+}
+
+.search__filter ul.filters {
+    margin-top: 20px
+}
+
+.search__filter ul.filters h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px
+}
+
+.search__filter ul.filters li {
+    margin-bottom: 7px
+}
+
+.search__filter ul.filters li input {
+    margin-right: 7px
+}
+
+.search__filter ul.filters li input.date_leftmargin {
+    margin-right: 0;
+    margin-left: 7px
+}
+
+.search__filter__btn {
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 200px;
+    height: 40px;
+    background-color: #c5bf69;
     border: none;
+    transition: .3s all;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
     font-weight: 500
 }
 
-.choices__list--dropdown .choices__item,
-.choices__list[aria-expanded] .choices__item {
-    font-weight: 500;
-    padding-left: 20px
-}
-
-.is-open .choices__inner {
-    border-radius: 20px
-}
-
-.is-flipped.is-open .choices__inner {
-    border-radius: 20px
+.search__filter__btn:hover {
+    background-color: #6a673c
 }

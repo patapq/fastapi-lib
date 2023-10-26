@@ -14,71 +14,83 @@
     <title>Document</title>
 </head>
 <body>
-
+    
     <section class="search">
         <div class="container">
             <div class="search__wrap">
                 <h2>Расширенный поиск</h2>
-                <div class="main__select main__select_mg0 main__select_mt10">
+                <div class="main__select main__select_mg0 main__select_mg0 main__select_mt10">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <!-- Не получается реализовать -->
-                    <!-- <div class="main__clear"><i class="fa-solid fa-xmark"></i></div> --> 
-                    <!-- <a class="main__arrow" href="#"><i class="fa-solid fa-arrow-right"></i></a> -->
-                    <form action="/books" method="post">
-                    <!-- <a href="/books"><button class="main__arrow main__arrow_btn"><i class="fa-solid fa-arrow-right"></i></button></a> -->
-                    <button class="main__arrow main__arrow_btn" type="submit"><i class="fa-solid fa-arrow-right"></i></button>
-                    
-                    <select class="js-choice" id="choiced" name="Select" multiple>
-                        <option value="">Поиск книг по названию, автору и т.д.</option>
-                    </select>
+                    <!-- <a href="books.html"><button class="main__arrow main__arrow_btn"><i class="fa-solid fa-arrow-right"></i></button></a> -->
+                    <a id="btn" class="main__arrow main__arrow_btn" href="javascript:void(0)"><i class="fa-solid fa-arrow-right"></i></a>
+                    <input type="text" class="main__input" id="prompt" placeholder="Поиск по системе">
+                    <ul class="breadcrumb">
+                        <li><a href="/">Первая страница</a></li>
+                        <li><a href="../books">Поиск в системе</a></li>
+                        <li>Книга</li>
+                    </ul>
+                    <div class="select select_top62" id="list">
+                        <div class="option">Толстой</div>
+                        <div class="option">Достоевский</div>
+                        <div class="option">Тургенев</div>
+                        <div class="option">Пушкин</div>
+                        <div class="option">Гончаров</div>
+                    </div>
                 </div>
-            </form>
-                <div class="search__block">
-                    <div class="search__items">
+                <div class="search__block search__block">
+                    <div class="search__items search__items_w100">
                         <div class="search__result">
                             <h2>Результат поиска</h2>
                             <div class="search__book__author">{{ book.title }}. {{ book.author }}</div>
                             <div class="search__book">
-                                <div class="search__book__img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="book"></div>
-                                <div class="search__book__characteristics">
-                                    <div class="search__book__descr">Характеристики</div>
-                                    <div class="search__book__descr__wrapper">
-                                        <div class="search__book__descr__wrap">
-                                            <div class="search__book__descr__wrap_title">Автор</div>
-                                            <div class="search__book__descr__wrap_title-value">{{ book.author }}</div>
-                                        </div>
-                                        <div class="search__book__descr__wrap">
-                                            <div class="search__book__descr__wrap_title">Название</div>
-                                            <div class="search__book__descr__wrap_title-value">{{ book.title }}</div>
-                                        </div>
-                                        <div class="search__book__descr__wrap">
-                                            <div class="search__book__descr__wrap_title">Издательство</div>
-                                            <div class="search__book__descr__wrap_title-value">Эксмо</div>
-                                        </div>
-                                        <div class="search__book__descr__wrap">
-                                            <div class="search__book__descr__wrap_title">Год издательства</div>
-                                            <div class="search__book__descr__wrap_title-value">1831</div>
-                                        </div>
-                                        <div class="search__book__descr__wrap">
-                                            <div class="search__book__descr__wrap_title">Страниц</div>
-                                            <div class="search__book__descr__wrap_title-value">224 стр.</div>
-                                        </div>
-                                        <div class="search__book__descr__wrap">
-                                            <div class="search__book__descr__wrap_title">Категория</div>
-                                            <div class="search__book__descr__wrap_title-value">{{ book.category }}</div>
-                                        </div>
-                                        <div class="search__book__descr__wrap">
-                                            <div class="search__book__descr__wrap_title">Тип</div>
-                                            <div class="search__book__descr__wrap_title-value">Книга</div>
+                                <div class="search__book__block">
+                                    <div class="search__book__img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="book"></div>
+                                    <div class="search__book__characteristics">
+                                        <div class="search__book__descr">Характеристики</div>
+                                        <div class="search__book__descr__wrapper">
+                                            <div class="search__book__descr__wrap">
+                                                <div class="search__book__descr__wrap_title">Автор</div>
+                                                <div class="search__book__descr__wrap_title-value">{{ book.author }}</div>
+                                            </div>
+                                            <div class="search__book__descr__wrap">
+                                                <div class="search__book__descr__wrap_title">Название</div>
+                                                <div class="search__book__descr__wrap_title-value">{{ book.title }}</div>
+                                            </div>
+                                            <div class="search__book__descr__wrap">
+                                                <div class="search__book__descr__wrap_title">Издательство</div>
+                                                <div class="search__book__descr__wrap_title-value">Эксмо</div>
+                                            </div>
+                                            <div class="search__book__descr__wrap">
+                                                <div class="search__book__descr__wrap_title">Год издательства</div>
+                                                <div class="search__book__descr__wrap_title-value">1831</div>
+                                            </div>
+                                            <div class="search__book__descr__wrap">
+                                                <div class="search__book__descr__wrap_title">Страниц</div>
+                                                <div class="search__book__descr__wrap_title-value">224 стр.</div>
+                                            </div>
+                                            <div class="search__book__descr__wrap">
+                                                <div class="search__book__descr__wrap_title">Категория</div>
+                                                <div class="search__book__descr__wrap_title-value">{{ book.category }}</div>
+                                            </div>
+                                            <div class="search__book__descr__wrap">
+                                                <div class="search__book__descr__wrap_title">Тип</div>
+                                                <div class="search__book__descr__wrap_title-value">Книга</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="search__book__descryption">
+                                    <div class="search__book__descryption_title">Описание</div>
+                                    <div class="search__book__descryption_text">Роман в стихах русского поэта Александра Сергеевича Пушкина, начат 9 мая 1823 года и закончен 5 октября 1831 года, одно из самых значительных произведений русской словесности. Повествование ведётся от имени безымянного автора, который, впрочем, в первых же строфах называет Онегина «добрый мой приятель». По известному определению В. Г. Белинского, Пушкин назвал «Евгения Онегина» романом в стихах, поскольку в нём изображена «жизнь во всей её прозаической действительности».</div>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
-                    <div class="search__filter">
+                    <!-- <div class="search__filter">
                         <div class="search__filter__title">Параметры поиска</div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

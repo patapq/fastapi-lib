@@ -1,0 +1,151 @@
+h2
+    font-size: 24px
+    font-weight: 700
+.search
+    min-height: 100vh
+    background-color: $beige
+    padding-top: 60px
+    padding-bottom: 60px 
+    &__items
+        width: 75%
+        padding-right: 20px
+        &_w100
+            width: 100%
+    &__filter
+        width: 25%
+        padding-left: 20px
+        border-left: 1px solid $beige 
+    &__wrap
+        display: block
+        padding: 32px
+        min-height: 560px
+        width: 100%
+        border-radius: 10px
+        background-color: #fff
+        box-shadow: 0 0 5px $darkHaki
+    &__block
+        margin-top: 20px
+        display: flex
+    &__panel
+        margin-top: 15px
+        margin-left: 5px  
+        &__title
+            font-size: 15px
+            font-weight: 400
+        &__btn
+            width: 550px
+            height: 40px
+            padding-left: 20px 
+            display: flex
+            flex-direction: column
+            justify-content: center
+            background-color: #fff
+            border-radius: 10px
+            transition: 0.5s all
+            cursor: pointer
+            border: 1px solid $beige
+            &:hover
+                background-color: $beige
+            i
+                margin-left: 8px 
+            &_active
+                i
+                    transform: rotate(180deg)
+        &__list
+            display: none
+            width: 100%
+            min-height: 50px
+            /* padding: 10px */
+            /* border: 1px solid $beige */
+            /* border-radius: 10px */
+            margin-top: 10px
+            &_active
+                display: block
+        &__item
+            width: 100%
+            min-height: 50px
+            border: 1px solid $beige
+            border-radius: 10px
+            display: flex
+            padding: 15px
+            margin-top: 10px
+            box-shadow: 0px 1px 5px $beige
+            &:nth-child(1)
+                margin-top: 0px 
+            .img
+                width: 30%
+                padding-right: 15px
+                img
+                    display: block
+                    width: 100%
+            .author
+                width: 30%
+                padding: 0 15px 0 15px
+                border-left: 1px solid $beige
+            .years
+                width: 20%
+                padding: 0 15px 0 15px
+                border-left: 1px solid $beige
+            .pages
+                padding-left: 15px
+                border-left: 1px solid $beige
+            .heading
+                color: #a1a5b9
+                font-weight: 400
+                font-size: 14px
+    &__descr
+        margin-top: 10px
+    &__result
+        h2
+            font-size: 22px
+            font-weight: 500
+    &__book
+        &__author
+            margin-top: 10px
+        margin-top: 20px
+        padding: 20px
+        border: 1px solid $darkHaki
+        border-radius: 10px
+        display: block
+        width: 100%
+        &__block
+            display: flex
+            width: 100%
+        &__img
+            width: 40%
+            img
+                width: 100%
+        &__characteristics
+            width: 60%
+            padding: 20px 0 0 20px
+        &__descr
+            font-size: 20px
+            font-weight: 500
+            &__wrapper
+                width: 100%
+                margin-top: 30px
+            &__wrap
+                display: flex
+                width: 100%
+                margin-top: 10px
+                padding-bottom: 2px 
+                border-bottom: 1px solid $beige
+                &_title
+                    width: 50%
+                    color: #a1a5b9
+                    font-weight: 400
+                    font-size: 16px
+                    &-value
+                        width: 50%
+        &__descryption
+            margin-top: 15px        
+            &_title
+                font-size: 20px
+                font-weight: 500
+                /* margin-left: 20px */
+            &_text
+                font-size: 16px
+                margin-top: 10px
+                font-weight: 400
+                
+

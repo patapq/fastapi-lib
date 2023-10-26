@@ -1,74 +1,69 @@
-let array = ['Пушкин', 'Достоевский', 'Толстой'];
-
-let sel = document.getElementById('choiced'); /* элемент select */
-
-for (let index = 0; index < array.length; index++) {
-    let opt = array[index]; /* присвоить значение списка */
-    let el = document.createElement("option"); /* Создаем option */
-    el.text = String(opt); /* Значение в строке выбора */
-    el.value = String(opt); /* Значение передающееся на сервер */
-    sel.add(el, null); /* Добавление option */
-}
+$(".main__input").on("focus", function(){
+    $('.select').addClass("select_active");
+})
 
 
-
-
-let element = document.querySelector('.js-choice');
-
-const choices = new Choices(element,{
-    searchEnabled: true
-});
-
-$('input').attr('name', 'prompt');
-$('input').attr('id', 'prompt');
-
-/* Не получается реализовать */
-/* $('.main__clear').on('click', function(){
-    $('.choices__item--selectable').remove();
-    $('input[type=text]').val("");
-    $('.choices__input--cloned').focus();
-}); */
-
-
-// Событие когда элемент получил фокус
-$('.choices__input--cloned').focus(function(){
-    document.querySelector(".choices__input--cloned").placeholder = "";
-
-});
-
-// Когда элемент теряет фокус
-$('.choices__input--cloned').blur(function(){
-	document.querySelector(".choices__input--cloned").placeholder = "Поиск книг по названию, автору и т.д.";
-    document.querySelector(".choices__input--cloned").style = "min-width: 1ch; width: 30ch;"; 
-});
-
-
-
-// const el = document.getElementById('btn');
-// console.log(el);
-// console.log('HI!')
-
-// el.addEventListener('click', async function(){
+var field = $('#list').find('.option');
+// собственно поиск
+$('.main__input').bind('keyup', function() {
+    var q = new RegExp($(this).val(), 'ig');
  
-//     // const prompt = document.getElementById("prompt").value;
-//     const info = document.getElementById("prompt").value;
-    
-    
-//     // console.log(prompt);
-//     console.log(info);
+    for (var i = 0, l = field.length; i < l; i += 1) {
+        var option = $(field[i]),
+            parent = option.parent();
 
-//     const response = await fetch("/books", {
-//             method: "POST",
-//             // redirect: "follow",
-//             headers: { "Accept": "application/json", "Content-Type": "multipart/form-data" },
-//             body: info
-            
-//         }).then(res => res.json());
-//         // if (response.ok) {
-//         //     const data = await response.json();
-//         //     // document.getElementById("bebra").textContent = data.message;
-//         //     // return data;
-//         // }
-//         // else
-//         //     console.log(response);
-// });
+        if ($(field[i]).text().match(q)) {
+            if (parent.is('span')) {
+                option.show();
+                parent.replaceWith(option);
+            }
+        } else {
+            if (option.is('.option') && (!parent.is('span'))) {
+                option.wrap('<span>').hide();
+            }
+        }
+    } 
+});
+
+
+$('.option').on('click', function(){
+    $('.main__input').val($(this).text());
+    $('input').focus();
+});
+
+
+
+
+const box = document.querySelector(".main__input");
+const select = document.querySelector(".select");
+document.addEventListener('click', (e) => {
+    const click1 = e.composedPath().includes(box);
+    const click2 = e.composedPath().includes(select);
+    if(!click1 && !click2)
+        $('.select').removeClass("select_active");
+
+})
+
+
+
+const el = document.getElementById('btn');
+
+el.addEventListener('click', async function(){
+ 
+    const info = document.getElementById("prompt").value;
+
+    const response = await fetch("/get_books", {
+            method: "POST",
+            headers: { "Accept": "application/json", "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                info: info
+            })
+        });
+    if (response.data) {
+        window.sessionStorage.setItem('data', JSON.stringify(response.data));
+    }
+    else {
+        console.log(response);
+    }
+    window.location.href = '/books';
+});

@@ -1,4 +1,4 @@
-from fastapi import Body, FastAPI, Request, Form
+from fastapi import Body, FastAPI, Request, Form, status
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -7,11 +7,12 @@ from pydantic import BaseModel
 from typing import Annotated
 
 
+
 app = FastAPI()
 
-app.mount("/frontend/", StaticFiles(directory="frontend"), name="frontend")
+app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
 
-templates = Jinja2Templates(directory="frontend/")
+templates = Jinja2Templates(directory="frontend")
 
 
 
@@ -24,22 +25,30 @@ BOOKS = [
 ]
 
 
+book_list = []
+
 
 @app.get('/')
 def root(request: Request):
 	return templates.TemplateResponse('index.html', {'request': request})
 
 
-@app.post('/books', response_class=HTMLResponse)
-async def books(request: Request, prompt: Annotated[str, Form(...)]):
-	
-	book_list = []
-	for book in BOOKS:
-		if book.get('title').casefold() == prompt.casefold() or book.get('author').casefold() == prompt.casefold() or book.get('category').casefold() == prompt.casefold():
-			book_list.append(book)
+@app.post('/get_books')
+async def get_books(request:Request, prompt = Body()):
+    print(prompt)
+    prompt = prompt['info']
+    book_list.clear()
+    for book in BOOKS:
+        if book.get('title').casefold() == prompt.casefold() or book.get('author').casefold() == prompt.casefold() or book.get('category').casefold() == prompt.casefold():
+            book_list.append(book)
+    print(book_list)
+    return RedirectResponse('/books', status_code=status.HTTP_303_SEE_OTHER)
 
-	return templates.TemplateResponse("books.html", {"request": request, 'book_list': book_list})
 
+@app.get('/books', response_class=HTMLResponse)
+async def books(request: Request):
+    
+    return templates.TemplateResponse("books.html", {"request": request, 'book_list': book_list})
 
 
 @app.get("/books/{book_id}", response_class=HTMLResponse)

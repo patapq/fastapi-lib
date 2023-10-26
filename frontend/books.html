@@ -31,47 +31,50 @@
                     <div class="search__items">
                         <div class="main__select main__select_mg0">
                             <i class="fa-solid fa-magnifying-glass"></i>
-                            <!-- Не получается реализовать -->
-                            <!-- <div class="main__clear"><i class="fa-solid fa-xmark"></i></div> --> 
-                            <form action="books" method="post">
-                    
-                                <!-- <button>Button</button> -->
-                                <button class="main__arrow main__arrow_btn" type="submit"><i class="fa-solid fa-arrow-right"></i></button>                            <select class="js-choice" id="choiced" name="Select" multiple>
-                                <option value="">Поиск книг по названию, автору и т.д.</option>
-                                <option>Электроник</option>
-                                <option>Сыроежкин</option>
-                                <option>Чижиков</option>
-                                <option>Кукушкина</option>
-                            </select>
+                            <!-- <a href="books.html"><button class="main__arrow main__arrow_btn"><i class="fa-solid fa-arrow-right"></i></button></a> -->
+                            <a id="btn" class="main__arrow main__arrow_btn" href="javascript:void(0)"><i class="fa-solid fa-arrow-right"></i></a>
+                            <input type="text" class="main__input" id="prompt" placeholder="Поиск по системе">
+                            <ul class="breadcrumb">
+                                <li><a href="/">Первая страница</a></li>
+                                <li>Поиск в системе</li>
+                            </ul>
+                            <div class="select select_top62" id="list">
+                                <div class="option">Толстой</div>
+                                <div class="option">Достоевский</div>
+                                <div class="option">Тургенев</div>
+                                <div class="option">Пушкин</div>
+                                <div class="option">Гончаров</div>
+                            </div>
                         </div>
-                        <!-- Первое -->
+                        <!-- в названиях книги -->
                         <div class="search__panel">
                             <div class="search__panel__btn search__panel__btn_active">
                                 <div class="search__panel__title">Найдено в названии книг<i class="fa-solid fa-chevron-down"></i></div>
                             </div>
-                            <div class="search__panel__list search__panel_title search__panel__list_active">
-                                {% for book in book_list %}
-                                <div class="search__panel__item">
-                                    <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
-                                    <div class="author">
-                                        <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name"><a href="books/{{ book.id }}">{{ book.title }}</a></div><div class="author_book">"{{ book.author }}"</div></div>
+                            <div class="search__panel__list search__panel__list_active">
+                                {% if book_list %}
+                                    {% for book in book_list %}
+                                    <div class="search__panel__item">
+                                        <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
+                                        <div class="author">
+                                            <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">{{ book.author }}</div><div class="author_book"><a href="books/{{ book.id }}">"{{ book.title }}"</a></div></div>
+                                        </div>
+                                        <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
+                                        <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">{{ book.category }}</div></div></div>
                                     </div>
-                                    <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1234</div></div></div>
-                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">{{ book.category }}</div></div></div>
-                                </div>
-                            </form>
-
-                                {% endfor %}
-
+                                    {% endfor %}
+                                {% else %}
+                                <p>Не найдено результатов по запросу</p>
+                                {% endif %}
                                 
                             </div>
                         </div>
-                        <!-- Новое
+                        <!-- в оглавлениях книги-->
                         <div class="search__panel">
                             <div class="search__panel__btn search__panel__btn_active">
                                 <div class="search__panel__title">Найдено в оглавлении книг<i class="fa-solid fa-chevron-down"></i></div>
                             </div>
-                            <div class="search__panel__list search__panel_heading search__panel__list_active">
+                            <div class="search__panel__list search__panel__list_active">
                                 <div class="search__panel__item">
                                     <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
                                     <div class="author">
@@ -92,10 +95,101 @@
                             </div>
                         
                         </div>
-                         -->
+
+                        <!-- в названиях журналов -->
+                        <div class="search__panel">
+                            <div class="search__panel__btn search__panel__btn_active">
+                                <div class="search__panel__title">Найдено в названиях журналов<i class="fa-solid fa-chevron-down"></i></div>
+                            </div>
+                            <div class="search__panel__list search__panel__list_active">
+                                <div class="search__panel__item">
+                                    <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
+                                    <div class="author">
+                                        <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
+                                    </div>
+                                    <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
+                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
+                                </div>
+
+                                <div class="search__panel__item">
+                                    <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
+                                    <div class="author">
+                                        <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
+                                    </div>
+                                    <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
+                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
+                                </div>
+                            </div>
+                        
+                        </div>
+
                     </div>
                     <div class="search__filter">
-                        <div class="search__filter__title">Параметры поиска</div>
+                        <!-- <div class="search__filter__title">Параметры поиска</div> -->
+                        <!-- создал checkbox поля для филтрации -->
+                        <div class="search__filter__title">
+                            <h3>Параметры поиска</h3>
+                        </div>
+                        <ul class="filters" id="sections">
+                            <h4>Поиск в разделаз ЭБС</h4>
+                            <li><label for="books">
+                                    <input type="checkbox" name="filter" value="books">По книгам
+                                </label></li>
+                            <li><label for="magazines">
+                                    <input type="checkbox" name="filter" value="magazines">По журналам
+                                </label></li>
+                        </ul>
+                        <ul class="filters" id="dates">
+                            <h4>Год издания</h4>
+                            <li><label for="start">С
+                                <input type="date" value="start" class="date_leftmargin">
+                            </label></li>
+                            <li><label for="start">До
+                                <input type="date" value="start" class="date_leftmargin">
+                            </label></li>
+                        </ul>
+                        <ul class="filters" id="search">
+                            <h4>Область поиска</h4>
+                            <li><label for="Authors">
+                                <input type="checkbox" name="filter" value="Authors">Авторы
+                            </label></li>
+                            <li><label for="Title">
+                                <input type="checkbox" name="filter" value="Title">Название
+                            </label></li>
+                        </ul>
+                        <ul class="filters" id="knowing">
+                            <h4>Области знаний</h4>
+                            <li><label for="Math">
+                                <input type="checkbox" name="filter" value="Math">Математика
+                            </label></li>
+                            <li><label for="Physics">
+                                <input type="checkbox" name="filter" value="Physics">Физика
+                            </label></li>
+                            <li><label for="Chemistry">
+                                <input type="checkbox" name="filter" value="Chemistry">Химия
+                            </label></li>
+                            <li><label for="Biology">
+                                <input type="checkbox" name="filter" value="Biology">Биология
+                            </label></li>
+                            <li><label for="Informatics">
+                                <input type="checkbox" name="filter" value="Informatics">Информатика
+                            </label></li>
+                            <li><label for="Geography">
+                                <input type="checkbox" name="filter" value="Geography">География
+                            </label></li>
+                            <li><label for="History">
+                                <input type="checkbox" name="filter" value="History">История
+                            </label></li>
+                            <li><label for="Psychology">
+                                <input type="checkbox" name="filter" value="Psychology">Психология
+                            </label></li>
+                        </ul>
+                        <style>li{list-style-type: none;}</style>
+                        <p>
+                            <!-- кнопка для применения фильров -->
+                            <button id="btn" class="search__filter__btn">Применить</button>
+                        </p>
+                        <script src="frontend/js/filter.js"></script>
                     </div>
                 </div>
             </div>
@@ -103,7 +197,6 @@
     </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js"></script>
     <script src="frontend/js/script.js"></script>
     <script src="frontend/js/change.js"></script>
 </body>
