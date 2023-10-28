@@ -10,6 +10,7 @@
     <script src="https://kit.fontawesome.com/c6a6357097.js" crossorigin="anonymous"></script> 
 
     <link rel="stylesheet" href="../frontend/css/style.css">
+    
 
     <title>Document</title>
 </head>
@@ -41,7 +42,7 @@
                     <div class="search__items search__items_w100">
                         <div class="search__result">
                             <h2>Результат поиска</h2>
-                            <div class="search__book__author">{{ book.title }}. {{ book.author }}</div>
+                            <div class="search__book__author">{{ book.book_name }}. {{ book.author }}</div>
                             <div class="search__book">
                                 <div class="search__book__block">
                                     <div class="search__book__img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="book"></div>
@@ -54,7 +55,7 @@
                                             </div>
                                             <div class="search__book__descr__wrap">
                                                 <div class="search__book__descr__wrap_title">Название</div>
-                                                <div class="search__book__descr__wrap_title-value">{{ book.title }}</div>
+                                                <div class="search__book__descr__wrap_title-value">{{ book.book_name }}</div>
                                             </div>
                                             <div class="search__book__descr__wrap">
                                                 <div class="search__book__descr__wrap_title">Издательство</div>
@@ -70,11 +71,11 @@
                                             </div>
                                             <div class="search__book__descr__wrap">
                                                 <div class="search__book__descr__wrap_title">Категория</div>
-                                                <div class="search__book__descr__wrap_title-value">{{ book.category }}</div>
+                                                <div class="search__book__descr__wrap_title-value">{{ book.book_category }}</div>
                                             </div>
                                             <div class="search__book__descr__wrap">
                                                 <div class="search__book__descr__wrap_title">Тип</div>
-                                                <div class="search__book__descr__wrap_title-value">Книга</div>
+                                                <div class="search__book__descr__wrap_title-value">{{ book.book_type }}</div>
                                             </div>
                                         </div>
                                     </div>

@@ -6,6 +6,8 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from typing import Annotated
 
+import database
+
 
 
 app = FastAPI()
@@ -16,13 +18,16 @@ templates = Jinja2Templates(directory="frontend")
 
 
 
-BOOKS = [ 
-	{'id': 1, 'title': 'Jane Eyre', 'author': 'Jane Austen', 'category': 'period drama'},
-	{'id': 2, 'title': 'Great Expectations', 'author': 'Charles Dickens', 'category': 'period drama'},
-	{'id': 3, 'title': 'Bourne Idemtity', 'author': 'Robert Ludlum', 'category': 'mystery/thriller'},
-	{'id': 4, 'title': 'DaVinci Code', 'author': 'Dan Brown', 'category': 'mystery/thriller'},
-	{'id': 5, 'title': 'The Match Girl', 'author': 'Charles Dickens', 'category': 'tragedy'}
-]
+# BOOKS = [ 
+# 	{'id': 1, 'title': 'Jane Eyre', 'author': 'Jane Austen', 'category': 'period drama'},
+# 	{'id': 2, 'title': 'Great Expectations', 'author': 'Charles Dickens', 'category': 'period drama'},
+# 	{'id': 3, 'title': 'Bourne Idemtity', 'author': 'Robert Ludlum', 'category': 'mystery/thriller'},
+# 	{'id': 4, 'title': 'DaVinci Code', 'author': 'Dan Brown', 'category': 'mystery/thriller'},
+# 	{'id': 5, 'title': 'The Match Girl', 'author': 'Charles Dickens', 'category': 'tragedy'}
+# ]
+
+# BOOKS = database.find_all_books()
+# print(BOOKS)
 
 
 book_list = []
@@ -34,27 +39,38 @@ def root(request: Request):
 
 
 @app.post('/get_books')
-async def get_books(request:Request, prompt = Body()):
-    print(prompt)
+async def get_books(request: Request, prompt = Body()):
     prompt = prompt['info']
     book_list.clear()
-    for book in BOOKS:
-        if book.get('title').casefold() == prompt.casefold() or book.get('author').casefold() == prompt.casefold() or book.get('category').casefold() == prompt.casefold():
-            book_list.append(book)
-    print(book_list)
+    # for book in BOOKS:
+    #     if book.get('book_name').casefold() == prompt.casefold() or book.get('author').casefold() == prompt.casefold() or book.get('category').casefold() == prompt.casefold():
+    #         book_list.append(book)
+    book_list.append(database.full_text_search(prompt).data)
+    for book in book_list:
+          print(book)
     return RedirectResponse('/books', status_code=status.HTTP_303_SEE_OTHER)
 
 
 @app.get('/books', response_class=HTMLResponse)
 async def books(request: Request):
-    
+    print(book_list)
     return templates.TemplateResponse("books.html", {"request": request, 'book_list': book_list})
 
 
-@app.get("/books/{book_id}", response_class=HTMLResponse)
-async def show_book(request: Request, book_id: int):
-	book = BOOKS[book_id - 1]
+@app.get("/books/{book_name}", response_class=HTMLResponse)
+async def show_book(request: Request, book_name: str):
+	book = book_list[book_name]
 	return templates.TemplateResponse("book.html", {"request": request, "book": book})
+
+
+
+# # CHANGE TO BOOK TITLE
+# @app.get("/books/{book_id}", response_class=HTMLResponse)
+# async def show_book(request: Request, book_id: int):
+# 	book = book_list[book_id - 1]
+# 	return templates.TemplateResponse("book.html", {"request": request, "book": book})
+
+
 
 
 

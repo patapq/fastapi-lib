@@ -54,14 +54,16 @@
                             <div class="search__panel__list search__panel__list_active">
                                 {% if book_list %}
                                     {% for book in book_list %}
-                                    <div class="search__panel__item">
-                                        <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
-                                        <div class="author">
-                                            <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">{{ book.author }}</div><div class="author_book"><a href="books/{{ book.id }}">"{{ book.title }}"</a></div></div>
+                                        {% for b in book %}
+                                        <div class="search__panel__item">
+                                            <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
+                                            <div class="author">
+                                                <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">{{ b.book_author }}</div><div class="author_book"><a href="books/{{ b.book_name }}">"{{ b.book_name }}"</a></div></div>
+                                            </div>
+                                            <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
+                                            <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">{{ b.category }}</div></div></div>
                                         </div>
-                                        <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
-                                        <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">{{ book.category }}</div></div></div>
-                                    </div>
+                                        {% endfor %}
                                     {% endfor %}
                                 {% else %}
                                 <p>Не найдено результатов по запросу</p>
@@ -131,7 +133,7 @@
                             <h3>Параметры поиска</h3>
                         </div>
                         <ul class="filters" id="sections">
-                            <h4>Поиск в разделаз ЭБС</h4>
+                            <h4>Поиск в разделах ЭБС</h4>
                             <li><label for="books">
                                     <input type="checkbox" name="filter" value="books">По книгам
                                 </label></li>
