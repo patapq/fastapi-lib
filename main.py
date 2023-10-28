@@ -14,6 +14,7 @@ app = FastAPI()
 
 app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
 
+# Шаблоны для отображения данных с бэка на фронт
 templates = Jinja2Templates(directory="frontend")
 
 
@@ -29,38 +30,52 @@ templates = Jinja2Templates(directory="frontend")
 # BOOKS = database.find_all_books()
 # print(BOOKS)
 
-
-book_list = []
+book_list = {}
 
 
 @app.get('/')
 def root(request: Request):
 	return templates.TemplateResponse('index.html', {'request': request})
 
-
+# Метод POST, получающий поисковой запрос от JS fetch (prompt = Body())
 @app.post('/get_books')
 async def get_books(request: Request, prompt = Body()):
     prompt = prompt['info']
-    book_list.clear()
+    # book_list.clear()
     # for book in BOOKS:
     #     if book.get('book_name').casefold() == prompt.casefold() or book.get('author').casefold() == prompt.casefold() or book.get('category').casefold() == prompt.casefold():
     #         book_list.append(book)
-    book_list.append(database.full_text_search(prompt).data)
-    for book in book_list:
-          print(book)
+    # print(database.full_text_search(prompt).data)
+
+    data = database.full_text_search(prompt).data
+    data_len = len(data)
+
+    book_list['book_list'] = data
+    book_list['count'] = data_len
+ 
     return RedirectResponse('/books', status_code=status.HTTP_303_SEE_OTHER)
 
 
 @app.get('/books', response_class=HTMLResponse)
 async def books(request: Request):
-    print(book_list)
+    # print(book_list)
     return templates.TemplateResponse("books.html", {"request": request, 'book_list': book_list})
 
 
-@app.get("/books/{book_name}", response_class=HTMLResponse)
-async def show_book(request: Request, book_name: str):
-	book = book_list[book_name]
-	return templates.TemplateResponse("book.html", {"request": request, "book": book})
+@app.get("/books/{book_id}", response_class=HTMLResponse)
+async def show_book(request: Request, book_id: int):
+    
+    # book = book_list['book_list'].get()
+    # book = book_list[book_list['book_id'] == book_id]
+    # print('######################')
+    
+    book = None
+    for b in book_list['book_list']:
+        print(b)
+        if b['book_id'] == book_id:
+            book = b
+    print(book)
+    return templates.TemplateResponse("book.html", {"request": request, "book": book})
 
 
 

@@ -49,21 +49,19 @@
                         <!-- в названиях книги -->
                         <div class="search__panel">
                             <div class="search__panel__btn search__panel__btn_active">
-                                <div class="search__panel__title">Найдено в названии книг<i class="fa-solid fa-chevron-down"></i></div>
+                                <div class="search__panel__title">Найдено в названии книг - {{ book_list['count'] }} результатов(-а)<i class="fa-solid fa-chevron-down"></i></div>
                             </div>
                             <div class="search__panel__list search__panel__list_active">
-                                {% if book_list %}
-                                    {% for book in book_list %}
-                                        {% for b in book %}
+                                {% if book_list['book_list'] %}
+                                    {% for b in book_list['book_list'] %}
                                         <div class="search__panel__item">
                                             <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
                                             <div class="author">
-                                                <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">{{ b.book_author }}</div><div class="author_book"><a href="books/{{ b.book_name }}">"{{ b.book_name }}"</a></div></div>
+                                                <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">{{ b.author_name }}</div><div class="author_book"><a href="books/{{ b.book_id }}">"{{ b.book_name }}"</a></div></div>
                                             </div>
-                                            <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
-                                            <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">{{ b.category }}</div></div></div>
+                                            <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">{{ b.book_type }}</div></div></div>
+                                            <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">{{ b.pages }}</div></div></div>
                                         </div>
-                                        {% endfor %}
                                     {% endfor %}
                                 {% else %}
                                 <p>Не найдено результатов по запросу</p>
@@ -83,7 +81,7 @@
                                         <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
                                     </div>
                                     <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
-                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
+                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">223 стр.</div></div></div>
                                 </div>
 
                                 <div class="search__panel__item">

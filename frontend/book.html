@@ -42,7 +42,7 @@
                     <div class="search__items search__items_w100">
                         <div class="search__result">
                             <h2>Результат поиска</h2>
-                            <div class="search__book__author">{{ book.book_name }}. {{ book.author }}</div>
+                            <div class="search__book__author">{{ book.book_name }}. {{ book.author_name }}</div>
                             <div class="search__book">
                                 <div class="search__book__block">
                                     <div class="search__book__img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="book"></div>
@@ -51,7 +51,7 @@
                                         <div class="search__book__descr__wrapper">
                                             <div class="search__book__descr__wrap">
                                                 <div class="search__book__descr__wrap_title">Автор</div>
-                                                <div class="search__book__descr__wrap_title-value">{{ book.author }}</div>
+                                                <div class="search__book__descr__wrap_title-value">{{ book.author_name }}</div>
                                             </div>
                                             <div class="search__book__descr__wrap">
                                                 <div class="search__book__descr__wrap_title">Название</div>
@@ -67,11 +67,11 @@
                                             </div>
                                             <div class="search__book__descr__wrap">
                                                 <div class="search__book__descr__wrap_title">Страниц</div>
-                                                <div class="search__book__descr__wrap_title-value">224 стр.</div>
+                                                <div class="search__book__descr__wrap_title-value">{{ book.pages }} стр.</div>
                                             </div>
                                             <div class="search__book__descr__wrap">
                                                 <div class="search__book__descr__wrap_title">Категория</div>
-                                                <div class="search__book__descr__wrap_title-value">{{ book.book_category }}</div>
+                                                <div class="search__book__descr__wrap_title-value">{{ book.book_type }}</div>
                                             </div>
                                             <div class="search__book__descr__wrap">
                                                 <div class="search__book__descr__wrap_title">Тип</div>
@@ -83,7 +83,7 @@
 
                                 <div class="search__book__descryption">
                                     <div class="search__book__descryption_title">Описание</div>
-                                    <div class="search__book__descryption_text">Роман в стихах русского поэта Александра Сергеевича Пушкина, начат 9 мая 1823 года и закончен 5 октября 1831 года, одно из самых значительных произведений русской словесности. Повествование ведётся от имени безымянного автора, который, впрочем, в первых же строфах называет Онегина «добрый мой приятель». По известному определению В. Г. Белинского, Пушкин назвал «Евгения Онегина» романом в стихах, поскольку в нём изображена «жизнь во всей её прозаической действительности».</div>
+                                    <div class="search__book__descryption_text">{{ book.book_description }}</div>
                                 </div>
                                 
                             </div>
