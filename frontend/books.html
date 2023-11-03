@@ -39,8 +39,8 @@
                                 <li>Поиск в системе</li>
                             </ul>
                             <div class="select select_top62" id="list">
-                                <div class="option">Толстой</div>
-                                <div class="option">Достоевский</div>
+                                <div class="option">книга</div>
+                                <div class="option">Жматов</div>
                                 <div class="option">Тургенев</div>
                                 <div class="option">Пушкин</div>
                                 <div class="option">Гончаров</div>
@@ -61,6 +61,8 @@
                                             </div>
                                             <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">{{ b.book_type }}</div></div></div>
                                             <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">{{ b.pages }}</div></div></div>
+                                            <div class="pages"><div class="heading">Описание</div><div class="search__descr"><div class="pages_book">...{{ b.headline|safe }}...</div></div></div>
+
                                         </div>
                                     {% endfor %}
                                 {% else %}
@@ -151,10 +153,16 @@
                         <ul class="filters" id="search">
                             <h4>Область поиска</h4>
                             <li><label for="Authors">
-                                <input type="checkbox" name="filter" value="Authors">Авторы
+                                <input type="checkbox" name="filter" value="author_name">Авторы
                             </label></li>
                             <li><label for="Title">
-                                <input type="checkbox" name="filter" value="Title">Название
+                                <input type="checkbox" name="filter" value="book_name">Название
+                            </label></li>
+                            <li><label for="books">
+                                <input type="checkbox" name="filter" value="book_type">По типу
+                            </label></li>
+                            <li><label for="books">
+                                <input type="checkbox" name="filter" value="book_description">По описанию
                             </label></li>
                         </ul>
                         <ul class="filters" id="knowing">
