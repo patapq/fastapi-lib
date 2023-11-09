@@ -9,6 +9,7 @@ h2
     &__items
         width: 75%
         padding-right: 20px
+        display: flex
         &_w100
             width: 100%
     &__filter
@@ -59,40 +60,41 @@ h2
             /* border: 1px solid $beige */
             /* border-radius: 10px */
             margin-top: 10px
-            &_active
+            &_active 
                 display: block
         &__item
             width: 100%
             min-height: 50px
             border: 1px solid $beige
             border-radius: 10px
-            display: flex
             padding: 15px
             margin-top: 10px
             box-shadow: 0px 1px 5px $beige
-            &:nth-child(1)
-                margin-top: 0px 
-            .img
-                width: 30%
-                padding-right: 15px
-                img
-                    display: block
-                    width: 100%
-            .author
-                width: 30%
-                padding: 0 15px 0 15px
-                border-left: 1px solid $beige
-            .years
-                width: 20%
-                padding: 0 15px 0 15px
-                border-left: 1px solid $beige
-            .pages
-                padding-left: 15px
-                border-left: 1px solid $beige
-            .heading
-                color: #a1a5b9
-                font-weight: 400
-                font-size: 14px
+            &_block
+                display: flex
+                &:nth-child(1)
+                    margin-top: 0px 
+                .img
+                    width: 30%
+                    padding-right: 15px
+                    img
+                        display: block
+                        width: 100%
+                .author
+                    width: 30%
+                    padding: 0 15px 0 15px
+                    border-left: 1px solid $beige
+                .years
+                    width: 20%
+                    padding: 0 15px 0 15px
+                    border-left: 1px solid $beige
+                .pages
+                    padding-left: 15px
+                    border-left: 1px solid $beige
+                .heading
+                    color: #a1a5b9
+                    font-weight: 400
+                    font-size: 14px
     &__descr
         margin-top: 10px
     &__result
@@ -143,9 +145,13 @@ h2
                 font-size: 20px
                 font-weight: 500
                 /* margin-left: 20px */
+                &_fz14
+                    font-size: 16px
             &_text
                 font-size: 16px
                 margin-top: 10px
                 font-weight: 400
+                &_fz12
+                    font-size: 14px
                 
 

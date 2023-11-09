@@ -5,6 +5,8 @@ __pycache__/
 fastapi-lib/
 node_modules/
 .gitignore
+package-lock.json
+package.json
 # C extensions
 *.so
 

@@ -1,8 +1,8 @@
 {
-  "name": "arturcode",
+  "name": "projectweb",
   "version": "1.0.0",
-  "description": "```\r cd fastapi-lib\r python3 -m venv myenv\r source myenv/bin/activate\r ```",
-  "main": "index.js",
+  "description": "",
+  "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,11 +11,14 @@
   "devDependencies": {
     "browser-sync": "^2.29.3",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^9.0.0",
+    "gulp-autoprefixer": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-cli": "^2.3.0",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
-    "sass": "^1.69.5"
+    "sass": "^1.69.3"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.16"
   }
 }
