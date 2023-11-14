@@ -50,13 +50,21 @@ const el = document.getElementById('btn');
 
 el.addEventListener('click', async function(){
  
-    const info = document.getElementById("prompt").value;
+    const prompt = document.getElementById("prompt").value;
+
+    // const filters = document.querySelector('.filters:checked');
+
+    const checkboxes = document.getElementsByName('filter');
+    const values = Array.from(checkboxes)
+    .filter(checkbox => checkbox.checked)
+    .map(checkbox => checkbox.value);
 
     const response = await fetch("/get_books", {
             method: "POST",
             headers: { "Accept": "application/json", "Content-Type": "application/json" },
             body: JSON.stringify({ 
-                info: info
+                prompt: prompt,
+                filters: values
             })
         });
     if (response.data) {

@@ -29,6 +29,9 @@ templates = Jinja2Templates(directory="frontend")
 
 # BOOKS = database.find_all_books()
 # print(BOOKS)
+class Info(BaseModel):
+    prompt: str
+    filters: list[str]
 
 book_list = {}
 
@@ -39,13 +42,18 @@ def root(request: Request):
 
 # Метод POST, получающий поисковой запрос от JS fetch (prompt = Body())
 @app.post('/get_books')
-async def get_books(request: Request, prompt = Body()):
-    prompt = prompt['info']
+async def get_books(request: Request, info: Info):
+    #prompt = prompt['info']
     # book_list.clear()
     # for book in BOOKS:
     #     if book.get('book_name').casefold() == prompt.casefold() or book.get('author').casefold() == prompt.casefold() or book.get('category').casefold() == prompt.casefold():
     #         book_list.append(book)
     # print(database.full_text_search(prompt).data)
+
+    print(info)
+    prompt = info.prompt
+    filters = info.filters
+    print(filters)
 
     data = database.full_text_search(prompt).data
     data_len = len(data)

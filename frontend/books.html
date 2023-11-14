@@ -58,7 +58,11 @@
                                             <div class="search__panel__item_block">
                                                 <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
                                                 <div class="author">
-                                                    <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">{{ b.author_name }}</div><div class="author_book"><a href="books/{{ b.book_id }}">"{{ b.book_name }}"</a></div></div>
+                                                    <div class="heading">Автор и название</div>
+                                                    <div class="search__descr">                                                        
+                                                        <div class="author_name"><a href="books/{{ b.book_id }}">{{ b.author_name }}</a></div>
+                                                        <div class="author_book"><a href="books/{{ b.book_id }}">"{{ b.book_name }}"</a></div>
+                                                    </div>
                                                 </div>
                                                 <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">{{ b.book_type }}</div></div></div>
                                                 <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">{{ b.pages }}</div></div></div>
@@ -96,26 +100,7 @@
                                         <div class="search__book__descryption_text search__book__descryption_text_fz14">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis in aspernatur, neque a delectus doloremque ut aliquid, harum quae architecto impedit vero corporis culpa iure. Soluta pariatur eligendi incidunt tempore!</div>
                                     </div>
                                 </div>
-
-                                <div class="search__panel__item">
-                                    <div class="search__panel__item_block">        
-                                        <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
-                                        <div class="author">
-                                            <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
-                                        </div>
-                                        <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
-                                        <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
-                                    </div>
-                                    <div class="search__book__descryption">
-                                        <div class="search__book__descryption_title search__book__descryption_title_fz16">Описание</div>
-                                        <div class="search__book__descryption_text search__book__descryption_text_fz14">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis in aspernatur, neque a delectus doloremque ut aliquid, harum quae architecto impedit vero corporis culpa iure. Soluta pariatur eligendi incidunt tempore!</div>
-                                    </div>
-                                </div>
-
-                                
-
                             </div>
-                        
                         </div>
 
                         <!-- в названиях журналов -->
@@ -124,22 +109,6 @@
                                 <div class="search__panel__title">Найдено в названиях журналов<i class="fa-solid fa-chevron-down"></i></div>
                             </div>
                             <div class="search__panel__list search__panel__list_active">
-
-                                <div class="search__panel__item">
-                                    <div class="search__panel__item_block">        
-                                        <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
-                                        <div class="author">
-                                            <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
-                                        </div>
-                                        <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
-                                        <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
-                                    </div>
-                                    <div class="search__book__descryption">
-                                        <div class="search__book__descryption_title search__book__descryption_title_fz16">Описание</div>
-                                        <div class="search__book__descryption_text search__book__descryption_text_fz14">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis in aspernatur, neque a delectus doloremque ut aliquid, harum quae architecto impedit vero corporis culpa iure. Soluta pariatur eligendi incidunt tempore!</div>
-                                    </div>
-                                </div>
-
                                 <div class="search__panel__item">
                                     <div class="search__panel__item_block">        
                                         <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
@@ -158,7 +127,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="search__filter">
                     <!-- <div class="search__filter__title">Параметры поиска</div> -->
                     <!-- создал checkbox поля для филтрации -->
@@ -182,7 +150,8 @@
                         <li><label for="start">С</label>
                             <input type="date" value="start" class="date_start" id="start">
                         </li>
-                        <li><label for="end">До </label>
+                        <li>
+                            <label for="end">До </label>
                             <input type="date" value="end" class="date_end" id="end">
                         </li>
                     </ul>
