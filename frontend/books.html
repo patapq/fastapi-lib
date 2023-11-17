@@ -40,8 +40,8 @@
                             </ul>
                             <div class="select select_top62" id="list">
                                 <div class="option">книга</div>
+                                <div class="option">задание</div>
                                 <div class="option">Жматов</div>
-                                <div class="option">Тургенев</div>
                                 <div class="option">Пушкин</div>
                                 <div class="option">Гончаров</div>
                             </div>
@@ -56,7 +56,7 @@
                                     {% for b in book_list['book_list'] %}
                                         <div class="search__panel__item">
                                             <div class="search__panel__item_block">
-                                                <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
+                                                <div class="img"><a href="books/{{ b.book_id }}"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></a></div>
                                                 <div class="author">
                                                     <div class="heading">Автор и название</div>
                                                     <div class="search__descr">                                                        

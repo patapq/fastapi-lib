@@ -18,21 +18,6 @@ app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
 templates = Jinja2Templates(directory="frontend")
 
 
-
-# BOOKS = [ 
-# 	{'id': 1, 'title': 'Jane Eyre', 'author': 'Jane Austen', 'category': 'period drama'},
-# 	{'id': 2, 'title': 'Great Expectations', 'author': 'Charles Dickens', 'category': 'period drama'},
-# 	{'id': 3, 'title': 'Bourne Idemtity', 'author': 'Robert Ludlum', 'category': 'mystery/thriller'},
-# 	{'id': 4, 'title': 'DaVinci Code', 'author': 'Dan Brown', 'category': 'mystery/thriller'},
-# 	{'id': 5, 'title': 'The Match Girl', 'author': 'Charles Dickens', 'category': 'tragedy'}
-# ]
-
-# BOOKS = database.find_all_books()
-# print(BOOKS)
-class Info(BaseModel):
-    prompt: str
-    filters: list[str]
-
 book_list = {}
 
 
@@ -51,17 +36,8 @@ def root(request: Request):
 # Метод POST, получающий поисковой запрос от JS fetch (prompt = Body())
 @app.post('/get_books')
 async def get_books(request: Request, info: Info):
-    #prompt = prompt['info']
-    # book_list.clear()
-    # for book in BOOKS:
-    #     if book.get('book_name').casefold() == prompt.casefold() or book.get('author').casefold() == prompt.casefold() or book.get('category').casefold() == prompt.casefold():
-    #         book_list.append(book)
-    # print(database.full_text_search(prompt).data)
-
-    print(info)
     prompt = info.prompt
     filters = info.filters
-    print(filters)
 
     data = database.full_text_search(prompt).data
     data_len = len(data)
@@ -75,86 +51,18 @@ async def get_books(request: Request, info: Info):
 
 @app.get('/books', response_class=HTMLResponse)
 async def books(request: Request):
-    # print(book_list)
     return templates.TemplateResponse("books.html", {"request": request, 'book_list': book_list})
 
 
 @app.get("/books/{book_id}", response_class=HTMLResponse)
 async def show_book(request: Request, book_id: int):
     
-    # book = book_list['book_list'].get()
-    # book = book_list[book_list['book_id'] == book_id]
-    # print('######################')
-    
     book = None
+
     for b in book_list['book_list']:
         print(b)
         if b['book_id'] == book_id:
             book = b
-    print(book)
+
     return templates.TemplateResponse("book.html", {"request": request, "book": book})
 
-
-
-# # CHANGE TO BOOK TITLE
-# @app.get("/books/{book_id}", response_class=HTMLResponse)
-# async def show_book(request: Request, book_id: int):
-# 	book = book_list[book_id - 1]
-# 	return templates.TemplateResponse("book.html", {"request": request, "book": book})
-
-
-
-
-
-# @app.post("/books/{book_id}", response_class=HTMLResponse)
-# async def show_book(request: Request, book_id: int, prompt = Form(...)):
-# 	book = BOOKS[book_id - 1]
-# 	return templates.TemplateResponse("book.html", {"request": request, "book": book})
-
-
-
-
-# #READ
-# @app.get('/books')
-# async def read_all_books():
-# 	return BOOKS
-
-
-# #CREATE
-# @app.post('/books/create_book')
-# async def create_book(new_book=Body()):
-# 	BOOKS.append(new_book)
-
-
-
-# @app.get('/books/{book_title}') #lets fastapi know that at this endpoint, you return the data in the function below it
-# async def read_all_books(book_title: str): #async is fairly optional on fastapi
-# 	for book in BOOKS:
-# 		if book.get('title').casefold() ==  book_title.casefold():
-# 			return book
-
-
-
-# @app.get('/books/{book_author}/') #query params can be used with dynamic params
-# async def filter_books_query_title(book_author: str, category: str):
-# 	book_category = []
-# 	for book in BOOKS:
-# 		if book.get('author').casefold() ==  book_author.casefold() and book.get('category').casefold() == category.casefold():
-# 			book_category.append(book)
-# 	return book_category
-	
-
-# #UPDATE
-# @app.put('/books/update_book')
-# async def update_book(update_book=Body()):
-# 	for i in range(len(BOOKS)):
-# 		if BOOKS[i].get('title').casefold() == update_book.get('title').casefold():
-# 			BOOKS[i] = update_book
-
-# #DELETE
-# @app.delete('/books/delete_book')
-# async def delete_book(book_title: str):
-# 	for i in range(len(BOOKS)):
-# 		if BOOKS[i].get('title').casefold() == book_title.casefold():
-# 			BOOKS.pop(i)
-# 			break
