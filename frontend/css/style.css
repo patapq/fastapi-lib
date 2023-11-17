@@ -256,50 +256,94 @@ h2 {
     min-height: 50px;
     border: 1px solid #c5bf69;
     border-radius: 10px;
-    display: flex;
     padding: 15px;
     margin-top: 10px;
     box-shadow: 0 1px 5px #c5bf69
 }
 
-.search__panel__item:nth-child(1) {
+.search__panel__item_block {
+    display: flex
+}
+
+.search__panel__item_block:nth-child(1) {
     margin-top: 0
 }
 
-.search__panel__item .img {
+.search__panel__item_block .img {
     width: 30%;
     padding-right: 15px
 }
 
-.search__panel__item .img img {
+.search__panel__item_block .img img {
     display: block;
     width: 100%
 }
 
-.search__panel__item .author {
-    width: 30%;
+.search__panel__item_block .img img:hover {
+    box-shadow: 0 0 9px #6a673c;
+    cursor: pointer
+}
+
+.search__panel__item_block .author {
+    width: 50%;
     padding: 0 15px 0 15px;
     border-left: 1px solid #c5bf69
 }
 
-.search__panel__item .years {
-    width: 20%;
+.search__panel__item_block .years {
+    width: 15%;
     padding: 0 15px 0 15px;
     border-left: 1px solid #c5bf69
 }
 
-.search__panel__item .pages {
+.search__panel__item_block .pages {
+    width: 10%;
     padding-left: 15px;
     border-left: 1px solid #c5bf69
 }
 
-.search__panel__item .heading {
+.search__panel__item_block .heading {
     color: #a1a5b9;
     font-weight: 400;
     font-size: 14px
 }
 
 .search__descr {
+    margin-top: 10px
+}
+
+.search__descr a {
+    color: #000;
+    text-decoration: none;
+    transition: .3s all
+}
+
+.search__descr a:hover {
+    color: #6a673c;
+    text-shadow: 0 0 1px #6a673c
+}
+
+.search__descr a:hover:before {
+    transform: scaleX(1);
+    transition: transform .25s
+}
+
+.search__descr a:before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #c5bf69;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: scaleX(0)
+}
+
+.search__descr .author_name {
+    color: #000
+}
+
+.search__descr .author_book {
     margin-top: 10px
 }
 
@@ -377,10 +421,18 @@ h2 {
     font-weight: 500
 }
 
+.search__book__descryption_title_fz14 {
+    font-size: 16px
+}
+
 .search__book__descryption_text {
     font-size: 16px;
     margin-top: 10px;
     font-weight: 400
+}
+
+.search__book__descryption_text_fz12 {
+    font-size: 14px
 }
 
 ul.breadcrumb {

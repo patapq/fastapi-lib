@@ -44,12 +44,25 @@ document.addEventListener('click', (e) => {
 
 })
 
+document.querySelector('#btn').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      // code for enter
+        goLINK.href = "javascript:void(0)";
+        print(1)
+    }
+});
 
+document.querySelector('#btn').addEventListener("keyup",function(e){
+    if(e.keyCode == 13){
+    //    let url = "?page=" + (params.page || "1") + "&record=" + e.target.value;
+    //    goLINK.classList.toggle("active");
+    //    goLINK.href = url;
+        console.log(1)
+    }
+});
 
-const el = document.getElementById('btn');
+transition = async function(){
 
-el.addEventListener('click', async function(){
- 
     const prompt = document.getElementById("prompt").value;
 
     // const filters = document.querySelector('.filters:checked');
@@ -74,4 +87,17 @@ el.addEventListener('click', async function(){
         console.log(response);
     }
     window.location.href = '/books';
+};
+
+const el = document.getElementById('btn');
+
+el.addEventListener('click', async function(){
+    transition();
 });
+
+document.addEventListener('keyup', function(event){
+    if(event.keyCode == 13 && document.getElementById("prompt").value != ''){
+        transition();
+    }
+});
+

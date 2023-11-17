@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
     <script src="https://kit.fontawesome.com/c6a6357097.js" crossorigin="anonymous"></script> 
     
-
+    <link rel="stylesheet" href="frontend/css/filter.css">
     <link rel="stylesheet" href="frontend/css/style.css">
     <title>LIBCOR</title>
 </head>
@@ -55,21 +55,30 @@
                                 {% if book_list['book_list'] %}
                                     {% for b in book_list['book_list'] %}
                                         <div class="search__panel__item">
-                                            <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
-                                            <div class="author">
-                                                <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">{{ b.author_name }}</div><div class="author_book"><a href="books/{{ b.book_id }}">"{{ b.book_name }}"</a></div></div>
+                                            <div class="search__panel__item_block">
+                                                <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
+                                                <div class="author">
+                                                    <div class="heading">Автор и название</div>
+                                                    <div class="search__descr">                                                        
+                                                        <div class="author_name"><a href="books/{{ b.book_id }}">{{ b.author_name }}</a></div>
+                                                        <div class="author_book"><a href="books/{{ b.book_id }}">"{{ b.book_name }}"</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">{{ b.book_type }}</div></div></div>
+                                                <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">{{ b.pages }}</div></div></div>
+                                                
                                             </div>
-                                            <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">{{ b.book_type }}</div></div></div>
-                                            <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">{{ b.pages }}</div></div></div>
-                                            <div class="pages"><div class="heading">Описание</div><div class="search__descr"><div class="pages_book">...{{ b.headline|safe }}...</div></div></div>
+                                            <!-- <div class="pages"><div class="heading">Описание</div><div class="search__descr"><div class="pages_book"></div></div></div> -->
 
+                                            <div class="search__book__descryption">
+                                                <div class="search__book__descryption_title search__book__descryption_title_fz16">Описание</div>
+                                                <div class="search__book__descryption_text search__book__descryption_text_fz14">...{{ b.headline|safe }}...</div>
+                                            </div>
                                         </div>
                                     {% endfor %}
                                 {% else %}
                                 <p>Не найдено результатов по запросу</p>
                                 {% endif %}
-                                
-                            </div>
                         </div>
                         <!-- в оглавлениях книги-->
                         <div class="search__panel">
@@ -78,24 +87,20 @@
                             </div>
                             <div class="search__panel__list search__panel__list_active">
                                 <div class="search__panel__item">
-                                    <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
-                                    <div class="author">
-                                        <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
+                                    <div class="search__panel__item_block">        
+                                        <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
+                                        <div class="author">
+                                            <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
+                                        </div>
+                                        <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
+                                        <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
                                     </div>
-                                    <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
-                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">223 стр.</div></div></div>
-                                </div>
-
-                                <div class="search__panel__item">
-                                    <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
-                                    <div class="author">
-                                        <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
+                                    <div class="search__book__descryption">
+                                        <div class="search__book__descryption_title search__book__descryption_title_fz16">Описание</div>
+                                        <div class="search__book__descryption_text search__book__descryption_text_fz14">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis in aspernatur, neque a delectus doloremque ut aliquid, harum quae architecto impedit vero corporis culpa iure. Soluta pariatur eligendi incidunt tempore!</div>
                                     </div>
-                                    <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
-                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
                                 </div>
                             </div>
-                        
                         </div>
 
                         <!-- в названиях журналов -->
@@ -105,100 +110,111 @@
                             </div>
                             <div class="search__panel__list search__panel__list_active">
                                 <div class="search__panel__item">
-                                    <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
-                                    <div class="author">
-                                        <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
+                                    <div class="search__panel__item_block">        
+                                        <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
+                                        <div class="author">
+                                            <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
+                                        </div>
+                                        <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
+                                        <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
                                     </div>
-                                    <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
-                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
-                                </div>
-
-                                <div class="search__panel__item">
-                                    <div class="img"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></div>
-                                    <div class="author">
-                                        <div class="heading">Автор и название</div><div class="search__descr"><div class="author_name">А.С. Пушкин</div><div class="author_book">"Евгений Онегин"</div></div>
+                                    <div class="search__book__descryption">
+                                        <div class="search__book__descryption_title search__book__descryption_title_fz16">Описание</div>
+                                        <div class="search__book__descryption_text search__book__descryption_text_fz14">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis in aspernatur, neque a delectus doloremque ut aliquid, harum quae architecto impedit vero corporis culpa iure. Soluta pariatur eligendi incidunt tempore!</div>
                                     </div>
-                                    <div class="years"><div class="heading">Год</div><div class="search__descr"><div class="years_public">1831</div></div></div>
-                                    <div class="pages"><div class="heading">Стр.</div><div class="search__descr"><div class="pages_book">224 стр.</div></div></div>
                                 </div>
                             </div>
-                        
                         </div>
-
                     </div>
-                    <div class="search__filter">
-                        <!-- <div class="search__filter__title">Параметры поиска</div> -->
-                        <!-- создал checkbox поля для филтрации -->
-                        <div class="search__filter__title">
-                            <h3>Параметры поиска</h3>
-                        </div>
-                        <ul class="filters" id="sections">
-                            <h4>Поиск в разделах ЭБС</h4>
-                            <li><label for="books">
-                                    <input type="checkbox" name="filter" value="books">По книгам
-                                </label></li>
-                            <li><label for="magazines">
-                                    <input type="checkbox" name="filter" value="magazines">По журналам
-                                </label></li>
-                        </ul>
-                        <ul class="filters" id="dates">
-                            <h4>Год издания</h4>
-                            <li><label for="start">С
-                                <input type="date" value="start" class="date_leftmargin">
-                            </label></li>
-                            <li><label for="start">До
-                                <input type="date" value="start" class="date_leftmargin">
-                            </label></li>
-                        </ul>
-                        <ul class="filters" id="search">
-                            <h4>Область поиска</h4>
-                            <li><label for="Authors">
-                                <input type="checkbox" name="filter" value="author_name">Авторы
-                            </label></li>
-                            <li><label for="Title">
-                                <input type="checkbox" name="filter" value="book_name">Название
-                            </label></li>
-                            <li><label for="books">
-                                <input type="checkbox" name="filter" value="book_type">По типу
-                            </label></li>
-                            <li><label for="books">
-                                <input type="checkbox" name="filter" value="book_description">По описанию
-                            </label></li>
-                        </ul>
-                        <ul class="filters" id="knowing">
-                            <h4>Области знаний</h4>
-                            <li><label for="Math">
-                                <input type="checkbox" name="filter" value="Math">Математика
-                            </label></li>
-                            <li><label for="Physics">
-                                <input type="checkbox" name="filter" value="Physics">Физика
-                            </label></li>
-                            <li><label for="Chemistry">
-                                <input type="checkbox" name="filter" value="Chemistry">Химия
-                            </label></li>
-                            <li><label for="Biology">
-                                <input type="checkbox" name="filter" value="Biology">Биология
-                            </label></li>
-                            <li><label for="Informatics">
-                                <input type="checkbox" name="filter" value="Informatics">Информатика
-                            </label></li>
-                            <li><label for="Geography">
-                                <input type="checkbox" name="filter" value="Geography">География
-                            </label></li>
-                            <li><label for="History">
-                                <input type="checkbox" name="filter" value="History">История
-                            </label></li>
-                            <li><label for="Psychology">
-                                <input type="checkbox" name="filter" value="Psychology">Психология
-                            </label></li>
-                        </ul>
-                        <style>li{list-style-type: none;}</style>
-                        <p>
-                            <!-- кнопка для применения фильров -->
-                            <button id="btn" class="search__filter__btn">Применить</button>
-                        </p>
-                        <script src="frontend/js/filter.js"></script>
+                </div>
+                <div class="search__filter">
+                    <!-- <div class="search__filter__title">Параметры поиска</div> -->
+                    <!-- создал checkbox поля для филтрации -->
+                    <div class="search__filter__title">
+                        <h3>Параметры поиска</h3>
                     </div>
+                    <ul class="filters" id="sections">
+                        <h4>Поиск в разделах</h4>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="books" id="books">
+                            <label for="books"> По книгам </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="magazines" id="magazines">
+                            <label for="magazines"> По журналам </label>
+                        </li>
+                    </ul>
+                    <ul class="filters" id="dates">
+                        <h4>Год издания</h4>
+                        <!-- изменил имена классов у поля даты -->
+                        <li><label for="start">С</label>
+                            <input type="date" value="start" class="date_start" id="start">
+                        </li>
+                        <li>
+                            <label for="end">До </label>
+                            <input type="date" value="end" class="date_end" id="end">
+                        </li>
+                    </ul>
+                    <ul class="filters" id="search">
+                        <h4>Область поиска</h4>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="Authors" id="Authors">
+                            <label for="Authors"> Авторы </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="Title" id="Title">
+                            <label for="Title"> Название </label>
+                        </li>
+                    </ul>
+                    <ul class="filters" id="knowing">
+                        <h4>Области знаний</h4>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="Math" id="Math">
+                            <label for="Math"> Математика </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="Physics" id="Physics">
+                            <label for="Physics">Физика</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="Chemistry" id="Chemistry">
+                            <label for="Chemistry">Химия
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="Biology" id="Biology">
+                            <label for="Biology">Биология
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="Informatics"
+                                id="Informatics">
+                            <label for="Informatics">Информатика
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="Geography" id="Geography">
+                            <label for="Geography">География
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="History" id="History">
+                            <label for="History">История
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="filter" name="filter" value="Psychology" id="Psychology">
+                            <label for="Psychology">Психология
+                            </label>
+                        </li>
+                    </ul>
+                    <p>
+                        <!-- кнопка для применения фильров -->
+                        <button id="btn" class="search__filter__btn">Применить</button>
+                        <!-- кнопка сброса фильтров -->
+                        <button id="drop" class="search__filter__btn">Сбросить</button>
+                    </p>
+                    <script src="frontend/js/filter.js"></script>
                 </div>
             </div>
         </div>

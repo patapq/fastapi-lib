@@ -2,6 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+fastapi-lib/
+node_modules/
+.gitignore
+package-lock.json
+package.json
 
 # C extensions
 *.so
