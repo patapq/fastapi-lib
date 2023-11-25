@@ -25,8 +25,8 @@ def find_all_books():
 
 
 
-def full_text_search(prompt):
-    result = supabase.rpc("full_text_search", {'prompt': prompt}).execute()
+def full_text_search(prompt, field_names):
+    result = supabase.rpc("full_text_search", {'prompt': prompt, 'field_names': field_names or None}).execute()
     return result
 
 

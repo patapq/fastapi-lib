@@ -1,4 +1,4 @@
-from fastapi import Body, FastAPI, Request, Form, status
+from fastapi import Body, FastAPI, Request, Form, status, HTTPException 
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -27,6 +27,10 @@ class Info(BaseModel):
      filters: list[str]
 
 
+@app.exception_handler(404)
+async def custom_404_handler(_, __):
+    return RedirectResponse('/books')
+
 
 @app.get('/')
 def root(request: Request):
@@ -38,14 +42,12 @@ def root(request: Request):
 async def get_books(request: Request, info: Info):
     prompt = info.prompt
     filters = info.filters
-
-    data = database.full_text_search(prompt).data
+    data = database.full_text_search(prompt, filters).data
     data_len = len(data)
-    
 
     book_list['book_list'] = data
     book_list['count'] = data_len
- 
+
     return RedirectResponse('/books', status_code=status.HTTP_303_SEE_OTHER)
 
 
@@ -59,10 +61,14 @@ async def show_book(request: Request, book_id: int):
     
     book = None
 
+    if not book_list:
+        raise HTTPException(status_code=404, detail='Empty book_list')
     for b in book_list['book_list']:
-        print(b)
         if b['book_id'] == book_id:
             book = b
+
+    if book is None:
+        raise HTTPException(status_code=404, detail='Empty book_list')
 
     return templates.TemplateResponse("book.html", {"request": request, "book": book})
 
