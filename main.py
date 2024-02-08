@@ -27,17 +27,20 @@ class Info(BaseModel):
      filters: list[str]
 
 
+# Exception handler if page does not exist
 @app.exception_handler(404)
 async def custom_404_handler(_, __):
     return RedirectResponse('/books')
 
 
+# Root page
 @app.get('/')
 def root(request: Request):
 	return templates.TemplateResponse('index.html', {'request': request})
 
 
 # Метод POST, получающий поисковой запрос от JS fetch (prompt = Body())
+# POST method that collects info and redirects to /books to show list of books
 @app.post('/get_books')
 async def get_books(request: Request, info: Info):
     prompt = info.prompt
@@ -51,11 +54,13 @@ async def get_books(request: Request, info: Info):
     return RedirectResponse('/books', status_code=status.HTTP_303_SEE_OTHER)
 
 
+# List of books page
 @app.get('/books', response_class=HTMLResponse)
 async def books(request: Request):
     return templates.TemplateResponse("books.html", {"request": request, 'book_list': book_list})
 
 
+# Specific book page
 @app.get("/books/{book_id}", response_class=HTMLResponse)
 async def show_book(request: Request, book_id: int):
     

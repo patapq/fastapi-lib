@@ -15,6 +15,7 @@ key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 
+
 def find_all_books():
     data = supabase.table("books").select("*").execute()
     # Equivalent for SQL Query "SELECT * FROM;"
@@ -24,7 +25,7 @@ def find_all_books():
         return 'No records found'
 
 
-
+# Full text search query
 def full_text_search(prompt, field_names):
     result = supabase.rpc("full_text_search", {'prompt': prompt, 'field_names': field_names or None}).execute()
     return result
