@@ -1,0 +1,116 @@
+.main
+    min-height: 100vh
+    background-color: $beige
+    padding-top: 100px 
+    &__input
+        width: 100%
+        height: 50px
+        padding: 0 0 0 50px
+        border: 1px solid $darkHaki
+        border-radius: 20px
+        box-shadow: 0 0 5px $darkHaki
+        font-size: 18px
+        &:focus
+            outline: none
+    &__logo
+        img
+            width: 80px
+            display: block
+            margin: 0 auto
+    h1
+        font-weight: 700
+        font-size: 40px
+        display: block
+        margin: 0 auto
+        text-align: center
+        margin-top: 10px
+        margin-bottom: 60px
+    &__select
+        position: relative
+        width: 560px
+        display: block
+        margin: 0 auto
+        transition: 0.5s all
+        .select
+            display: none
+            position: absolute
+            background-color: #fff
+            width: 100%
+            min-height: 40px
+            max-height: 300px
+            overflow: auto
+            margin-top: 10px
+            border: 1px solid gray
+            box-shadow: 0 0 5px $darkHaki
+            border-radius: 5px
+            z-index: 4
+            &_top62
+                margin-top: 0px
+                top: 62px
+            &_active
+                display: block
+            .option
+                transition: 0.2s all
+                width: 100%
+                height: 40px
+                display: flex
+                flex-direction: column
+                justify-content: center
+                padding: 0 5px 0 15px
+                &:hover
+                    background-color: $beige
+        i
+            position: absolute
+            z-index: 3
+            margin: 16px 0 0 17px 
+            font-size: 20px
+        &_mg0
+            margin: 0
+        &_mt10
+            margin-top: 10px
+    &__arrow 
+        position: absolute
+        right: 0px
+        top: 0px
+        width: 40px
+        height: 40px
+        background-color: $beige
+        z-index: 2
+        border-radius: 100%
+        margin: 5px 10px 0 0
+        cursor: pointer
+        transition: 0.5s all
+        &:hover
+            background-color: $darkHaki
+        i
+            position: absolute
+            margin: 9px
+            font-size: 23px
+            color: black
+        &_btn
+            border: 1px solid $darkHaki
+            i
+                position: relative
+    &__clear
+        position: absolute
+        top: 0
+        right: 0px
+        color: $beige
+        z-index: 4
+        margin: 16px 80px 0 0
+        cursor: pointer
+        i
+            margin: 0
+            z-index: 2
+            font-size: 24px
+            transition: 0.3s all
+            &:hover
+                color: $darkHaki
+            
+
+
+            
+
+
+
+        
