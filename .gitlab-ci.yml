@@ -11,6 +11,6 @@ build:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     #- docker build -t $IMAGE_TAG .
-    - docker-compose build --build-args IMAGE_TAG=$IMAGE_TAG
+    - docker-compose up
     - docker push $IMAGE_TAG
 
