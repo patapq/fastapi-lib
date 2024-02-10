@@ -1,0 +1,15 @@
+stages:
+  - build
+
+build:
+  stage: build
+  before_script:
+    - echo "Hello $GITLAB_USER_NAME"
+    #- curl -X POST -H 'Content-Type:application/json' -d '{"chat_id":"-1002113711391", "text":"Deploy Started by Garfiev"}' https://api.telegram.org/bot6344485887:AAEMMy_Z-U2KZmoMnmvjsAoJ9_RBW1I7H8Q/sendMessage 
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+
