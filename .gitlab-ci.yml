@@ -3,7 +3,7 @@ stages:
   - deploy
 
 before_script:
-  - apt add --no-cache vault
+  - apt install vault
 
 build-job:
   stage: build
