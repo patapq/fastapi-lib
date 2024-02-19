@@ -1,6 +1,7 @@
 stages:
   - build
   - deploy
+
 build-job:
   stage: build
   variables:
@@ -12,10 +13,13 @@ build-job:
 
 deploy-job:
   stage: deploy
-
   tags:
     - lab 
   script:
+    - vault login --token $VAULT_TOKEN $VAULT_ADDRESS
+    - export SUPABASE_URL=$(vault kv get --field=SUPABASE_URL kv/supabase)
+    - export SUPABASE_KEY=$(vault kv get --field=SUPABASE_KEY kv/supabase)
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker rm container-do-5-libcor
-    - docker run --name container-do-5-libcor -p 30065:80 $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    - docker compose up -d
+    # - docker rm container-do-5-libcor
+    # - docker run --name container-do-5-libcor -p 30065:80 $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
