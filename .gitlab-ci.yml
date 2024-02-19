@@ -20,6 +20,6 @@ deploy-job:
     - export SUPABASE_URL=$(vault kv get --field=SUPABASE_URL kv/supabase)
     - export SUPABASE_KEY=$(vault kv get --field=SUPABASE_KEY kv/supabase)
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker compose up -d
+    - docker compose up -d --build
     # - docker rm container-do-5-libcor
     # - docker run --name container-do-5-libcor -p 30065:80 $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
