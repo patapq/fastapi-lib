@@ -2,6 +2,9 @@ stages:
   - build
   - deploy
 
+before_script:
+  - apt add --no-cache vault
+
 build-job:
   stage: build
   variables:
