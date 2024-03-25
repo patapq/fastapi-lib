@@ -44,25 +44,12 @@ document.addEventListener('click', (e) => {
 
 })
 
-document.querySelector('#btn').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      // code for enter
-        goLINK.href = "javascript:void(0)";
-        print(1)
-    }
-});
-
-document.querySelector('#btn').addEventListener("keyup",function(e){
-    if(e.keyCode == 13){
-    //    let url = "?page=" + (params.page || "1") + "&record=" + e.target.value;
-    //    goLINK.classList.toggle("active");
-    //    goLINK.href = url;
-        console.log(1)
-    }
-});
 
 transition = async function(){
+    let box = document.querySelector(".loader");
+    box.style.display = "inline-block"
 
+    
     const prompt = document.getElementById("prompt").value;
 
     // const filters = document.querySelector('.filters:checked');
@@ -87,6 +74,7 @@ transition = async function(){
         console.log(response);
     }
     window.location.href = '/books';
+    box.style.display = "none"
 };
 
 const el = document.getElementById('btn');

@@ -14,7 +14,6 @@ key: str = os.environ.get("SUPABASE_KEY")
 
 supabase: Client = create_client(url, key)
 
-
 def find_all_books():
     data = supabase.table("books").select("*").execute()
     # Equivalent for SQL Query "SELECT * FROM;"

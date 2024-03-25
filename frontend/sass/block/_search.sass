@@ -79,6 +79,7 @@ h2
                     img
                         display: block
                         width: 100%
+                        transition: 0.2s all
                         &:hover
                             box-shadow: 0 0 9px $darkHaki
                             cursor: pointer
@@ -100,10 +101,11 @@ h2
                     font-size: 14px
     &__descr
         margin-top: 10px
-        a
+        a 
             color: black
             text-decoration: none
             transition: 0.3s all
+            position: relative
             &:hover
                 color: $darkHaki
                 text-shadow: 0 0 1px $darkHaki
