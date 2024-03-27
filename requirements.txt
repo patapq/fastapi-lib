@@ -4,5 +4,5 @@ typing
 minio
 urllib3
 certifi
-dotenv
+python-dotenv
 supabase
