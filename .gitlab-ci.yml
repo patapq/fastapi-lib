@@ -1,0 +1,30 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build-minio:
+  stage: build
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+
+test-minio:
+  stage: test
+  script:
+    - curl "https://https://127.0.0.1:9000/-/readliness"
+
+deploy-minio:
+  stage: deploy
+  tags:
+    - lab 
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - vault login --token $VAULT_TOKEN $VAULT_ADDRESS
+    - export SUPABASE_URL=$(vault kv get --field=SUPABASE_URL kv/supabase)
+    - export SUPABASE_KEY=$(vault kv get --field=SUPABASE_KEY kv/supabase)
+ 
+    - docker compose up -d

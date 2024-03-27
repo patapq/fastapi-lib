@@ -1,0 +1,20 @@
+services:
+  web:
+    build: .
+    container_name: do-5-libcor-web
+    ports:
+      - 30065:80
+    volumes:
+      - ./app:/code
+  vault:
+    image: hashicorp/vault
+    container_name: do-5-libcor-vault
+    ports:
+      - 8200:8200
+    volumes:
+      - ./vault/config:/vault/config
+      - ./vault/policies:/vault/policies
+      - ./vault/data:/vault/data
+    cap_add:
+        - IPC_LOCK
+    entrypoint: vault server -config=/vault/config/vault.json
