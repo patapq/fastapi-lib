@@ -1,0 +1,8 @@
+fastapi
+pydantic
+typing
+minio
+urllib3
+certifi
+dotenv
+supabase
