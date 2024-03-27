@@ -15,7 +15,7 @@ build-minio:
 test-minio:
   stage: test
   script:
-    - curl "https://https://127.0.0.1:9000/-/readliness"
+    - curl "https://127.0.0.1:9000/-/readliness"
 
 deploy-minio:
   stage: deploy
