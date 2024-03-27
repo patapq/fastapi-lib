@@ -6,6 +6,4 @@ COPY requirements.txt requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-COPY ./files .
-
 CMD ["python", "database.py","file_uploader_minio.py","main.py"]
