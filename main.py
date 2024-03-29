@@ -9,6 +9,57 @@ from typing import Annotated
 import database
 
 
+from minio import Minio
+from minio.error import S3Error
+import os
+import requests
+from minio import Minio
+import urllib3
+from urllib.parse import urlparse
+import certifi
+from minio.commonconfig import REPLACE, CopySource
+
+#Подключение к MiniO
+minio_endpoint = os.getenv("MINIO_ENDPOINT", "https://192.168.1.110:9000")
+secure = False
+
+minio_endpoint = urlparse(minio_endpoint)
+
+if minio_endpoint.scheme == 'https':
+    secure = True
+
+ok_http_client = urllib3.PoolManager(
+            timeout=urllib3.util.Timeout(connect = 10, read = 10),
+            maxsize = 10,
+            cert_reqs = 'CERT_NONE',
+            ca_certs = os.environ.get('SSL_CERT_FILE') or certifi.where(),
+            retries = urllib3.Retry(
+                total = 5,
+                backoff_factor = 0.2,
+                status_forcelist = [500, 502, 503, 504]
+            )
+        )
+
+minioClient = Minio(minio_endpoint.netloc,
+                    access_key = 'minioadmin',
+                    secret_key = 'minioadmin',
+                    http_client = ok_http_client,
+                    secure = secure)
+
+# Функция для получения метрик MiniO
+def get_minio_metrics():
+    try:
+        # Получаем количество файлов в бакете на MiniO сервере
+        bucket_name = "books-images"
+        objects = minioClient.list_objects(bucket_name)
+        total_files = len([obj.object_name for obj in objects])
+
+        metrics = {
+            'total_files': total_files
+        }
+        return metrics
+    except S3Error as e:
+        return {'error': str(e)}
 
 app = FastAPI()
 
@@ -77,3 +128,9 @@ async def show_book(request: Request, book_id: int):
 
     return templates.TemplateResponse("book.html", {"request": request, "book": book})
 
+#https://cv1.litres.ru/pub/c/cover_415/5807213.webp
+#/get_book_image
+@app.get("/health")
+async def health_check():
+    metrics = get_minio_metrics()
+    return metrics

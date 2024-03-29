@@ -1,4 +1,4 @@
-// кнопка сброса филтрации
+// кнопка сброса фильтрации
 const drop = document.getElementById("drop");
 drop.addEventListener("click", (event) => {
     // $(':checkbox').prop('checked',false)
