@@ -2,8 +2,8 @@ stages:
   - build
   - deploy
 
-before_script:
-  - apt install vault
+# before_script:
+  # - apt install vault
 
 build-job:
   stage: build
