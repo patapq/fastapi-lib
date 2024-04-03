@@ -9,22 +9,20 @@ services:
     volumes:
       - ./app:/code
   minio:
-    build: ./minio 
-    volumes:
-      - ./minio:/app
+    image: quay.io/minio/minio
+    command: server /data --console-address ":9090"
+    restart: always
     ports:
       - 9000:9000
-      - 9001:9001
-    environment:
-      MINIO_ROOT_USER: 'minioadmin'
-      MINIO_ROOT_PASSWORD: 'minioadmin'
-      MINIO_ADDRESS: ':9000'
-      MINIO_CONSOLE_ADDRESS: ':9001'
-  minio_start:
-    build: ./minio_start
-    container_name: minio_start
+      - 9090:9090
     volumes:
-      - ./minio_start:/app
+      - ~/minio/data:/data
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+
+
+
     
 
 
