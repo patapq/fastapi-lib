@@ -16,6 +16,8 @@ from typing import Annotated
 
 import database
 
+from PIL import Image
+import io
 
 
 app = FastAPI()
@@ -80,6 +82,14 @@ async def get_books(request: Request, info: Info):
     data = database.full_text_search(prompt, filters).data
     data_len = len(data)
 
+    for elem in data:
+        try:
+            string = f'{elem["book_id"]}.webp'
+            elem["book_image"] = download_file_from_minio(filePath=string)
+        except:
+            print('error')
+
+    print(data)
     book_list['book_list'] = data
     book_list['count'] = data_len
 
@@ -109,6 +119,48 @@ async def show_book(request: Request, book_id: int):
 
     return templates.TemplateResponse("book.html", {"request": request, "book": book})
 
+
+# Метод GET для Minio
+@app.get("/download/minio/{filePath}")
+def download_file_from_minio(
+        *, filePath: str = Path(..., title="The relative path to the file", min_length=1, max_length=500)):
+    try:
+        minio_client = MinioHandler().get_instance()    
+
+        # проверка клиента на наличие файла
+        # if not minio_client.check_file_name_exists(minio_client.bucket_name, filePath):
+        #     raise CustomException(http_code=400, code='400',
+        #                           message='File not exists')
+        
+        if minio_client.check_file_name_exists(minio_client.bucket_name, filePath):
+            url = minio_client.presigned_get_object(minio_client.bucket_name, filePath)
+        else:            
+            url = minio_client.presigned_get_object(minio_client.bucket_name, '0.webp')
+
+            
+        print(url)
+        # return StreamingResponse(BytesIO(file)) # для вывода потока данных может потребоваться 
+        return url
+        # Чтение файла из Minio
+        # file = minio_client.client.get_object(minio_client.bucket_name, filePath).read()
+ 
+        # Чтение url адреса через 
+        url = minio_client.presigned_get_object(minio_client.bucket_name, filePath)
+        print(url)
+        # return StreamingResponse(BytesIO(file)) # для вывода потока данных может потребоваться 
+        return url
+    except CustomException as e:
+        raise e
+    except Exception as e:
+        if e.__class__.__name__ == 'MaxRetryError':
+            raise CustomException(http_code=400, code='400', message='Can not connect to Minio')
+        raise CustomException(code='999', message='Server Error')
+
+
+
+# if __name__ == "__main__":
+#     uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True)
+
 # метод POST для Minio
 @app.post("/upload/minio", response_model=UploadFileResponse)
 async def upload_file_to_minio(file: UploadFile = File(...)):
@@ -131,27 +183,3 @@ async def upload_file_to_minio(file: UploadFile = File(...)):
         if e.__class__.__name__ == 'MaxRetryError':
             raise CustomException(http_code=400, code='400', message='Can not connect to Minio')
         raise CustomException(code='999', message='Server Error')
-
-# Метод GET для Minio
-@app.get("/download/minio/{filePath}")
-def download_file_from_minio(
-        *, filePath: str = Path(..., title="The relative path to the file", min_length=1, max_length=500)):
-    try:
-        minio_client = MinioHandler().get_instance()    
-        if not minio_client.check_file_name_exists(minio_client.bucket_name, filePath):
-            raise CustomException(http_code=400, code='400',
-                                  message='File not exists')
-
-        file = minio_client.client.get_object(minio_client.bucket_name, filePath).read()
-        return StreamingResponse(BytesIO(file))
-    except CustomException as e:
-        raise e
-    except Exception as e:
-        if e.__class__.__name__ == 'MaxRetryError':
-            raise CustomException(http_code=400, code='400', message='Can not connect to Minio')
-        raise CustomException(code='999', message='Server Error')
-
-
-
-# if __name__ == "__main__":
-#     uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True)

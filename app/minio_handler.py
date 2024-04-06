@@ -30,7 +30,7 @@ class MinioHandler():
             secure=False,
         )
         self.make_bucket()
-
+ 
     def make_bucket(self) -> str:
         if not self.client.bucket_exists(self.bucket_name):
             self.client.make_bucket(self.bucket_name)
@@ -55,7 +55,7 @@ class MinioHandler():
 
     def put_object(self, file_data, file_name, content_type):
         try:
-            datetime_prefix = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+            # datetime_prefix = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
             # object_name = f"{datetime_prefix}___{file_name}"
             object_name = f"{file_name}"
             while self.check_file_name_exists(bucket_name=self.bucket_name, file_name=object_name):

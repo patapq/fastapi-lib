@@ -55,8 +55,9 @@
                                 {% if book_list['book_list'] %}
                                     {% for b in book_list['book_list'] %}
                                         <div class="search__panel__item">
-                                            <div class="search__panel__item_block">
-                                                <div class="img"><a href="books/{{ b.book_id }}"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></a></div>
+                                            <div class="search__panel__item_block">  
+                                                <!-- https://cv1.litres.ru/pub/c/cover_415/5807213.webp -->
+                                                <div class="img"><a href="books/{{ b.book_id }}"><img src="{{ b.book_image }}" alt="Onegin"></a></div>
                                                 <div class="author">
                                                     <div class="heading">Автор и название</div>
                                                     <div class="search__descr">                                                        
