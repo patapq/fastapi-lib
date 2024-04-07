@@ -1,4 +1,6 @@
 import uvicorn
+import os
+import asyncio
 
 from fastapi import Body, FastAPI, Request, Form, status, HTTPException 
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
@@ -125,30 +127,24 @@ async def show_book(request: Request, book_id: int):
 def download_file_from_minio(
         *, filePath: str = Path(..., title="The relative path to the file", min_length=1, max_length=500)):
     try:
-        minio_client = MinioHandler().get_instance()    
-
+        minio_client = MinioHandler().get_instance()   
         # проверка клиента на наличие файла
         # if not minio_client.check_file_name_exists(minio_client.bucket_name, filePath):
         #     raise CustomException(http_code=400, code='400',
         #                           message='File not exists')
-        
         if minio_client.check_file_name_exists(minio_client.bucket_name, filePath):
+            # Чтение url адреса через 
             url = minio_client.presigned_get_object(minio_client.bucket_name, filePath)
         else:            
+            # Чтение url адреса через 
             url = minio_client.presigned_get_object(minio_client.bucket_name, '0.webp')
-
-            
         print(url)
         # return StreamingResponse(BytesIO(file)) # для вывода потока данных может потребоваться 
         return url
         # Чтение файла из Minio
         # file = minio_client.client.get_object(minio_client.bucket_name, filePath).read()
- 
-        # Чтение url адреса через 
-        url = minio_client.presigned_get_object(minio_client.bucket_name, filePath)
-        print(url)
         # return StreamingResponse(BytesIO(file)) # для вывода потока данных может потребоваться 
-        return url
+
     except CustomException as e:
         raise e
     except Exception as e:
@@ -156,30 +152,47 @@ def download_file_from_minio(
             raise CustomException(http_code=400, code='400', message='Can not connect to Minio')
         raise CustomException(code='999', message='Server Error')
 
-
-
-# if __name__ == "__main__":
-#     uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True)
 
 # метод POST для Minio
 @app.post("/upload/minio", response_model=UploadFileResponse)
-async def upload_file_to_minio(file: UploadFile = File(...)):
+async def upload_file_to_minio(filename, file: UploadFile = File(...)):
     try:
-        data = file.file.read()
+        minio_client = MinioHandler().get_instance()  
+        filePath = filename.split('/')[-1]
+        if minio_client.check_file_name_exists(minio_client.bucket_name, filePath):
+            # Чтение url адреса через 
+            print(f'{filePath} file exists in Minio')
+        else:            
+            # data = file.file.read()
+            data = file.read()
+            # file_name = " ".join(file.filename.strip().split())
+            file_name = " ".join(filename.strip().split())
 
-        file_name = " ".join(file.filename.strip().split())
+            content_type = 'image/webp'
 
-        data_file = MinioHandler().get_instance().put_object(
-            file_name=file_name,
-            file_data=BytesIO(data),
-            content_type=file.content_type
-        )
-
-        
-        return data_file
+            data_file = MinioHandler().get_instance().put_object(
+                file_name=file_name,
+                file_data=BytesIO(data),
+                content_type=content_type # file.content_type
+            )
+            return data_file
     except CustomException as e:
         raise e
     except Exception as e:
         if e.__class__.__name__ == 'MaxRetryError':
             raise CustomException(http_code=400, code='400', message='Can not connect to Minio')
         raise CustomException(code='999', message='Server Error')
+    
+
+async def main():   
+    local_folder_path = "images/"
+    image_files = [f for f in os.listdir(local_folder_path) if os.path.isfile(os.path.join(local_folder_path, f))]
+
+    for image_file in image_files:
+        with open(os.path.join(local_folder_path, image_file), "rb") as file:
+            # Вызов функции upload_file_to_minio с передачей файла
+            await upload_file_to_minio(filename=image_file, file=file)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

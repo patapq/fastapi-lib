@@ -42,7 +42,7 @@ class MinioHandler():
             bucket_name=bucket_name,
             object_name=object_name,
             expires=timedelta(days=7)
-        )
+        ) 
         return url
 
     def check_file_name_exists(self, bucket_name, file_name):
