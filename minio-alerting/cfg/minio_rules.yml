@@ -1,0 +1,29 @@
+groups:
+- name: minio-alerts
+  rules:
+  - alert: NodesOffline
+    expr: avg_over_time(minio_cluster_nodes_offline_total{job="minio-job"}[1m]) > 0
+    for: 1m
+    labels:
+      severity: warn
+    annotations:
+      summary: "Node down in MinIO deployment"
+      description: "Node(s) in cluster {{ $labels.instance }} offline for more than 5 minutes"
+
+  - alert: DisksOffline
+    expr: avg_over_time(minio_cluster_drive_offline_total{job="minio-job"}[1m]) > 0
+    for: 1m
+    labels:
+      severity: warn
+    annotations:
+      summary: ""
+      description: ""
+
+  - alert: InstanceDown
+    expr: up == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minute."
+      summary: "vse upalo vse propalo"
