@@ -19,7 +19,7 @@ class MinioHandler():
 
     def __init__(self):
         # self.minio_url = f'{minio_host}:{minio_port}'
-        self.minio_url = 'localhost:9000'
+        self.minio_url = '0.0.0.0:9000'
         self.access_key = 'admin'
         self.secret_key = 'password@123'
         self.bucket_name = 'fastapi-minio'
@@ -42,7 +42,7 @@ class MinioHandler():
             bucket_name=bucket_name,
             object_name=object_name,
             expires=timedelta(days=7)
-        ) 
+        )
         return url
 
     def check_file_name_exists(self, bucket_name, file_name):

@@ -4,3 +4,4 @@ python-multipart
 supabase
 jinja2
 minio
+asyncio

@@ -1,6 +1,9 @@
 import uvicorn
 import os
 import asyncio
+import time
+
+
 
 from fastapi import Body, FastAPI, Request, Form, status, HTTPException 
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
@@ -18,8 +21,7 @@ from typing import Annotated
 
 import database
 
-from PIL import Image
-import io
+
 
 
 app = FastAPI()
@@ -193,6 +195,10 @@ async def main():
             # Вызов функции upload_file_to_minio с передачей файла
             await upload_file_to_minio(filename=image_file, file=file)
 
+    uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True)
+
 if __name__ == "__main__":
+    # Подождать 3 секунды
+    time.sleep(3)
     asyncio.run(main())
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    
