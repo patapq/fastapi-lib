@@ -1,18 +1,18 @@
 stages:
-  - build
+  # - build
   - deploy
 
 # before_script:
   # - apt install vault
 
-build-job:
-  stage: build
-  variables:
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $IMAGE_TAG .
-    - docker push $IMAGE_TAG
+# build-job:
+#   stage: build
+#   variables:
+#     IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+#   script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#     - docker build -t $IMAGE_TAG .
+#     - docker push $IMAGE_TAG
 
 deploy-job:
   stage: deploy
@@ -20,7 +20,9 @@ deploy-job:
     # - lab 
     - k8s
   script:
-    - kubectl version
+    - apt install neofetch
+    - sudo apt install neofetch
+    - apk install neofetch
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - apk add curl jq vault
     # - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=${VAULT_ROLE} jwt=)"
