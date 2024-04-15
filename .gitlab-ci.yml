@@ -29,7 +29,7 @@ deploy-job:
     # - helm upgrade --install libcor-runner -f helm-chart/values.yaml gitlab/gitlab-runner
     # - helm list -n do-5-libcor
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY 
-    - docker compose up -d
+    - docker compose up -d --build
 
     # put values into vault
     - docker compose exec -T do-5-libcor-vault vault kv put secret/libcor SUPABASE_KEY=$SUPABASE_KEY
