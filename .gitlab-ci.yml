@@ -20,18 +20,19 @@ test-job:
   tags:
     - do-5-libcor
   script:
+    - apk add neofetch
     - neofetch
 
-deploy-job:
-  # stage: deploy
-  image: alpine/helm:3.11.1
-  tags:
-    # - lab 
-    - k8s
-  script:
-    - helm repo add gitlab https://charts.gitlab.io
-    - helm repo update gitlab
-    - helm upgrade --install libcor-runner -f helm-chart/values.yaml gitlab/gitlab-runner
+# deploy-job:
+#   # stage: deploy
+#   image: alpine/helm:3.11.1
+#   tags:
+#     # - lab 
+#     - k8s
+#   script:
+#     - helm repo add gitlab https://charts.gitlab.io
+#     - helm repo update gitlab
+#     - helm upgrade --install libcor-runner -f helm-chart/values.yaml gitlab/gitlab-runner
     # - helm list -n do-5-libcor
     # - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     # - apk add curl jq vault
