@@ -32,13 +32,13 @@ deploy-job:
     - docker compose up -d
 
     # put values into vault
-    - docker exec -it do-5-libcor-vault vault kv put secret/libcor SUPABASE_KEY=$SUPABASE_KEY
-    - docker exec -it do-5-libcor-vault vault kv put secret/libcor SUPABASE_URL=$SUPABASE_URL
-    - docker exec -it do-5-libcor-vault vault kv put secret/libcor VAULT_ADDRESS=$VAULT_ADRESS
-    - docker exec -it do-5-libcor-vault vault kv put secret/libcor VAULT_TOKEN=$VAULT_TOKEN
+    - docker compose exec -T do-5-libcor-vault vault kv put secret/libcor SUPABASE_KEY=$SUPABASE_KEY
+    - docker compose exec -T do-5-libcor-vault vault kv put secret/libcor SUPABASE_URL=$SUPABASE_URL
+    - docker compose exec -T do-5-libcor-vault vault kv put secret/libcor VAULT_ADDRESS=$VAULT_ADRESS
+    - docker compose exec -T do-5-libcor-vault vault kv put secret/libcor VAULT_TOKEN=$VAULT_TOKEN
 
     # retrieve values from vault using vault CLI
-    - export VAULT_TOKEN=$(docker exec -it do-5-libcor-vault vault kv get -field=VAULT_TOKEN secret/libcor)
+    - export VAULT_TOKEN=$(docker compose exec -T do-5-libcor-vault vault kv get -field=VAULT_TOKEN secret/libcor)
     # retrieve values from vault using API
     - curl -H "X-Vault-Token:$(VAULT_TOKEN)" -X GET http://127.0.0.1:8201/v1/secret/libcor -s
     - echo $VAULT_TOKEN
