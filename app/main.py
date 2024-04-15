@@ -199,6 +199,6 @@ async def main():
 
 if __name__ == "__main__":
     # Подождать 3 секунды
-    time.sleep(3)
+    time.sleep(1)
     asyncio.run(main())
     

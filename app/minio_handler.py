@@ -16,10 +16,10 @@ class MinioHandler():
         if not MinioHandler.__instance:
             MinioHandler.__instance = MinioHandler()
         return MinioHandler.__instance 
-
-    def __init__(self):
+ 
+    def __init__(self, minio_url='localhost'):
         # self.minio_url = f'{minio_host}:{minio_port}'
-        self.minio_url = '0.0.0.0:9000'
+        self.minio_url = f'{minio_url}:9000'
         self.access_key = 'admin'
         self.secret_key = 'password@123'
         self.bucket_name = 'fastapi-minio'
