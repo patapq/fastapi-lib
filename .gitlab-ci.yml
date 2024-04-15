@@ -20,7 +20,6 @@ test-job:
   tags:
     - do-5-libcor
   script:
-    - apk add neofetch
     - neofetch
 
 deploy-job:
