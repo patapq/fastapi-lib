@@ -21,6 +21,8 @@ build-job:
 
 deploy-job:
   stage: deploy  
+  tags: 
+    - lab
   script:
     # - helm repo add gitlab https://charts.gitlab.io
     # - helm repo update gitlab
