@@ -30,7 +30,7 @@ deploy-job:
     # - helm list -n do-5-libcor
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker rm -f do-5-libcor-web do-5-libcor-vault
-    - docker compose up -d --build
+    - docker compose up --build
 
     # put values into vault
     - docker compose exec -T do-5-libcor-vault vault kv put secret/libcor SUPABASE_KEY=$SUPABASE_KEY
