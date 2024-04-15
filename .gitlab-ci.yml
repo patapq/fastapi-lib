@@ -1,46 +1,46 @@
 stages:
-  # - build
-  - test
-  # - deploy
+  - build
+  # - test
+  - deploy
 
-# before_script:
-  # - apt install vault
 
-# build-job:
-#   stage: build
-#   variables:
-#     IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-#   script:
-#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-#     - docker build -t $IMAGE_TAG .
-#     - docker push $IMAGE_TAG
-
-test-job:
-  stage: test
-  tags:
-    - do-5-libcor
+build-job:
+  stage: build
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   script:
-    # - apk add neofetch
-    - neofetch
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
 
-# deploy-job:
-#   # stage: deploy
-#   image: alpine/helm:3.11.1
+# test-job:
+#   stage: test
 #   tags:
-#     # - lab 
-#     - k8s
+#     - do-5-libcor
 #   script:
-#     - helm repo add gitlab https://charts.gitlab.io
-#     - helm repo update gitlab
-#     - helm upgrade --install libcor-runner -f helm-chart/values.yaml gitlab/gitlab-runner
+
+deploy-job:
+  stage: deploy  
+  script:
+    # - helm repo add gitlab https://charts.gitlab.io
+    # - helm repo update gitlab
+    # - helm upgrade --install libcor-runner -f helm-chart/values.yaml gitlab/gitlab-runner
     # - helm list -n do-5-libcor
-    # - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    # - apk add curl jq vault
-    # - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=${VAULT_ROLE} jwt=)"
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY 
+    - docker compose up -d
+
+    # put values into vault
+    - docker exec -it do-5-libcor-vault vault kv put secret/libcor SUPABASE_KEY=$SUPABASE_KEY
+    - docker exec -it do-5-libcor-vault vault kv put secret/libcor SUPABASE_URL=$SUPABASE_URL
+    - docker exec -it do-5-libcor-vault vault kv put secret/libcor VAULT_ADDRESS=$VAULT_ADRESS
+    - docker exec -it do-5-libcor-vault vault kv put secret/libcor VAULT_TOKEN=$VAULT_TOKEN
+
+    # retrieve values from vault using vault CLI
+    - export VAULT_TOKEN=$(docker exec -it do-5-libcor-vault vault kv get -field=VAULT_TOKEN secret/libcor)
+    # retrieve values from vault using API
+    - curl -H "X-Vault-Token:$(VAULT_TOKEN)" -X GET http://127.0.0.1:8201/v1/secret/libcor -s
+    - echo $VAULT_TOKEN
+
     # - vault login --token $VAULT_TOKEN $VAULT_ADDRESS
     # - export SUPABASE_URL=$(vault kv get --field=SUPABASE_URL kv/supabase)
     # - export SUPABASE_KEY=$(vault kv get --field=SUPABASE_KEY kv/supabase)
- 
-    # - docker compose up -d
-    # - docker rm container-do-5-libcor
-    # - docker run --name container-do-5-libcor -p 30065:80 $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
