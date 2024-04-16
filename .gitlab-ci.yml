@@ -23,8 +23,8 @@ deploy-job:
   stage: deploy  
   tags: 
     - lab
-  # before_script:
-    # - rm -rf app/__pycache__/
+  before_script:
+    - rm -rf app/__pycache__/
   script:
     # - helm repo add gitlab https://charts.gitlab.io
     # - helm repo update gitlab
