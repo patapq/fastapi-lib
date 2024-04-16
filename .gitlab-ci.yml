@@ -11,7 +11,7 @@ build-job:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
-    - rm -rf app/__pycache__/
+    # - rm -rf app/__pycache__/
 
 # test-job:
 #   stage: test
