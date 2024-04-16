@@ -8,6 +8,7 @@ services:
       - 30065:80
     volumes:
       - ./app:/code
+  
   vault:
     image: hashicorp/vault
     container_name: do-5-libcor-vault
