@@ -2,6 +2,7 @@ services:
   web:
     build: .
     container_name: do-5-libcor-web
+    depends_on: vault
     ports:
       - 30065:80
     volumes:
