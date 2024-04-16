@@ -24,6 +24,7 @@ deploy-job:
   tags: 
     - lab
   script:
+    #
     # - helm repo add gitlab https://charts.gitlab.io
     # - helm repo update gitlab
     # - helm upgrade --install libcor-runner -f helm-chart/values.yaml gitlab/gitlab-runner
