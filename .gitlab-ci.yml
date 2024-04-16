@@ -3,7 +3,6 @@ stages:
   # - test
   - deploy
 
-
 build-job:
   stage: build
   variables:
