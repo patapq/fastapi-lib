@@ -41,6 +41,9 @@ deploy-job:
     - docker compose exec -T do-5-libcor-vault vault kv put secret/libcor VAULT_TOKEN=$VAULT_TOKEN
 
     # retrieve values from vault using vault CLI
+    - export SUPABASE_URL=$(docker compose exec -T do-5-libcor-vault vault kv get -field=SUPABASE_URL secret/libcor)
+    - export SUPABASE_KEY=$(docker compose exec -T do-5-libcor-vault vault kv get -field=SUPABASE_KEY secret/libcor)
+    
     - export VAULT_TOKEN=$(docker compose exec -T do-5-libcor-vault vault kv get -field=VAULT_TOKEN secret/libcor)
     # retrieve values from vault using API
     - curl -H "X-Vault-Token:$(VAULT_TOKEN)" -X GET http://127.0.0.1:8201/v1/secret/libcor -s
