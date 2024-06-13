@@ -1,26 +1,57 @@
 stages:
   - build
   - deploy
+  - test
 
-build:
+build-job:
   stage: build
-  before_script:
-    - echo "Hello $GITLAB_USER_NAME"
-    #- curl -X POST -H 'Content-Type:application/json' -d '{"chat_id":"-1002113711391", "text":"Deploy Started by Garfiev"}' https://api.telegram.org/bot6344485887:AAEMMy_Z-U2KZmoMnmvjsAoJ9_RBW1I7H8Q/sendMessage 
   variables:
     IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
-  only:
-    - main
+  # only:
+    # - main
 
-deploy:
-  stage: deploy
+healthchecker:
+  stage: test
+  tags:
+    - do-5-libcor
   script:
+    - curl http://localhost:9000/minio/health/live
+
+deploy-job:
+  stage: deploy  
+  tags: 
+    - lab
+  script:
+    #
+    # - helm repo add gitlab https://charts.gitlab.io
+    # - helm repo update gitlab
+    # - helm upgrade --install libcor-runner -f helm-chart/values.yaml gitlab/gitlab-runner
+    # - helm list -n do-5-libcor
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker run -d --name container-do-5-user10 -p 8000:80 $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-  only:
-    - main
+    - docker rm -f do-5-libcor-web do-5-libcor-vault
+    - docker compose up --build -u ${UID}
+
+    # put values into vault
+    - docker compose exec -T do-5-libcor-vault vault kv put secret/libcor SUPABASE_KEY=$SUPABASE_KEY
+    - docker compose exec -T do-5-libcor-vault vault kv put secret/libcor SUPABASE_URL=$SUPABASE_URL
+    - docker compose exec -T do-5-libcor-vault vault kv put secret/libcor VAULT_ADDRESS=$VAULT_ADRESS
+    - docker compose exec -T do-5-libcor-vault vault kv put secret/libcor VAULT_TOKEN=$VAULT_TOKEN
+
+    # retrieve values from vault using vault CLI
+    - export SUPABASE_URL=$(docker compose exec -T do-5-libcor-vault vault kv get -field=SUPABASE_URL secret/libcor)
+    - export SUPABASE_KEY=$(docker compose exec -T do-5-libcor-vault vault kv get -field=SUPABASE_KEY secret/libcor)
+    
+    - export VAULT_TOKEN=$(docker compose exec -T do-5-libcor-vault vault kv get -field=VAULT_TOKEN secret/libcor)
+    # retrieve values from vault using API
+    - curl -H "X-Vault-Token:$(VAULT_TOKEN)" -X GET http://127.0.0.1:8201/v1/secret/libcor -s
+    - echo $VAULT_TOKEN
+
+    # - vault login --token $VAULT_TOKEN $VAULT_ADDRESS
+    # - export SUPABASE_URL=$(vault kv get --field=SUPABASE_URL kv/supabase)
+    # - export SUPABASE_KEY=$(vault kv get --field=SUPABASE_KEY kv/supabase)
+
 

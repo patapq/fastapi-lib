@@ -77,6 +77,23 @@ services:
     # networks:
     #   - minio-local
     #network_mode: host
+  vault:
+    image: hashicorp/vault
+    container_name: do-5-libcor-vault
+    hostname: vault
+    ports:
+      - 8201:8201
+    volumes:
+      - ./config.hcl:/vault/config/config.hcl
+        # - vault-data:/vault/file/
+    environment:
+      - VAULT_ADDR=http://localhost:8201
+      - VAULT_DEV_ROOT_TOKEN_ID=00000000-0000-0000-0000-000000000000
+      - VAULT_TOKEN=00000000-0000-0000-0000-000000000000
+    cap_add:
+      - IPC_LOCK
+    command: server -dev -dev-root-token-id="00000000-0000-0000-0000-000000000000"
+    restart: always
 
 # networks:
 #   minio-local:

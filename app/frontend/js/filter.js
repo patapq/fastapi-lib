@@ -40,6 +40,11 @@ btn.addEventListener('click', (event) => {
 });
 
 
+document.querySelector('.fa-solid.fa-filter').addEventListener('click', function() {
+    this.classList.toggle('fa-solid_dark');
+    document.querySelector('.search__filter').classList.toggle('search__filter_media')
+});
+
 // const lisTest = document.getElementsByClassName('author_name');
 // if(checkboxes){
 //     for(let liT of lisTest){

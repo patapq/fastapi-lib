@@ -198,7 +198,7 @@ async def main():
     uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True)
 
 if __name__ == "__main__":
-    # Подождать 3 секунды
+    # Подождать 1 секунду
     time.sleep(1)
     asyncio.run(main())
     
