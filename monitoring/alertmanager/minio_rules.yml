@@ -1,0 +1,20 @@
+groups:
+- name: minio-alerts
+  rules:
+  - alert: DisksOffline
+    expr: avg_over_time(minio_cluster_drive_offline_total{job="minio-job"}[1m]) > 0
+    for: 1m
+    labels:
+      severity: warn
+    annotations:
+      summary: ""
+      description: ""
+
+  - alert: InstanceDown
+    expr: up == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minute."
+      summary: "vse upalo vse propalo"

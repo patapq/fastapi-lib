@@ -100,8 +100,47 @@ services:
 #     driver: bridge
     # external: true
 
-    
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9990:9090"
+    volumes:
+      - ./monitoring/prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    restart: unless-stopped
 
+  alertmanager:
+    depends_on:
+      - prometheus
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    ports:
+      - "9993:9093"
+    volumes:
+      - ./monitoring/alertmanager/:/etc/alertmanager/
+      - alertmanager_data:/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--storage.path=/alertmanager'
+    restart: unless-stopped
 
+  grafana:
+    image: grafana/grafana
+    user: root
+    container_name: grafana
+    depends_on: 
+      - prometheus
+    ports:
+      - "3300:3000"
+    volumes:
+      - ./monitoring/grafana/:/var/lib/grafana
+      - ./monitoring/grafana-provisioning:/etc/grafana/provisioning/
+    restart: unless-stopped
 
-
+volumes:
+  prometheus_data:
+  alertmanager_data:
