@@ -26,7 +26,7 @@
     <section class="search">
         <div class="container">
             <div class="search__wrap">
-                <h2>Расширенный поиск</h2>
+                <h2>Расширенный поиск<i class="fa-solid fa-filter"></i></h2>
                 <div class="search__block">
                     <div class="search__items">
                         <div class="main__select main__select_mg0">
@@ -55,8 +55,9 @@
                                 {% if book_list['book_list'] %}
                                     {% for b in book_list['book_list'] %}
                                         <div class="search__panel__item">
-                                            <div class="search__panel__item_block">
-                                                <div class="img"><a href="books/{{ b.book_id }}"><img src="https://cv1.litres.ru/pub/c/cover_415/5807213.webp" alt="Onegin"></a></div>
+                                            <div class="search__panel__item_block">  
+                                                <!-- https://cv1.litres.ru/pub/c/cover_415/5807213.webp -->
+                                                <div class="img"><a href="books/{{ b.book_id }}"><img src="{{ b.book_image }}" alt="Onegin"></a></div>
                                                 <div class="author">
                                                     <div class="heading">Автор и название</div>
                                                     <div class="search__descr">                                                        
@@ -216,12 +217,12 @@
                             </label>
                         </li>
                     </ul>
-                    <!-- <p> -->
-                    <!--     <!-- кнопка для применения фильров -->
-                    <!--     <button id="btn" class="search__filter__btn">Применить</button> -->
-                    <!--     <!-- кнопка сброса фильтров -->
-                    <!--     <button id="drop" class="search__filter__btn">Сбросить</button> -->
-                    <!-- </p> -->
+                    <p> 
+                    <!--     кнопка для применения фильров -->
+                        <!-- <button id="btn" class="search__filter__btn">Применить</button> -->
+                    <!--     кнопка сброса фильтров -->
+                        <button id="drop" class="search__filter__btn">Сбросить</button>
+                    </p>
                     <!-- <script src="frontend/js/filter.js"></script> -->
                 </div>
             </div>
@@ -231,5 +232,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="frontend/js/script.js"></script>
     <script src="frontend/js/change.js"></script>
+    <script src="frontend/js/filter.js"></script>
 </body>
 </html>

@@ -77,7 +77,7 @@ transition = async function(){
             headers: { "Accept": "application/json", "Content-Type": "application/json" },
             body: JSON.stringify({ 
                 prompt: prompt,
-                filters: values
+                filters: values 
             })
         });
     if (response.data) {
