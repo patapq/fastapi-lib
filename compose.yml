@@ -12,6 +12,7 @@ services:
     environment:
       MINIO_ACCESS_KEY: admin
       MINIO_SECRET_KEY: password@123
+      MINIO_PROMETHEUS_AUTH_TYPE: public
     command: server http://minio{1...2}/data{1...2}
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
@@ -32,6 +33,7 @@ services:
     environment:
       MINIO_ACCESS_KEY: admin
       MINIO_SECRET_KEY: password@123
+      MINIO_PROMETHEUS_AUTH_TYPE: public
     command: server http://minio{1...2}/data{1...2}
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
